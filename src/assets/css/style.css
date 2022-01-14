@@ -937,7 +937,7 @@ footer .attribution a {
   display: block;
   background-color: #3300cc;
   color: #3300cc;
-  background-size: 100%;
+  background-size: cover;
   background-position: top left;
   background-repeat: no-repeat;
   margin: 0;

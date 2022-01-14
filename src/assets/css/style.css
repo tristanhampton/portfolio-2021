@@ -473,6 +473,116 @@ body {
  * ----------------------------------------------- */
 /* Borders
  * ----------------------------------------------- */
+/* Other
+ * ----------------------------------------------- */
+.gradient-hover {
+  text-decoration: none;
+  background: linear-gradient(to right, #FFF 0 50%, #cc00cc, #9900cc);
+  background-size: 250%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.3s ease-out;
+}
+.gradient-hover:hover, .gradient-hover:focus {
+  background-position: 100%;
+  text-decoration: none;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Font Sizes
+ *----------------------------------*/
+p {
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+h1 {
+  font-family: "Noto Serif", serif;
+  font-weight: 400;
+  font-size: 3.649rem;
+}
+@media (min-width: 781px) {
+  h1 {
+    font-size: 6.866rem;
+  }
+}
+
+h2 {
+  font-family: "Noto Serif", serif;
+  font-weight: 400;
+  font-size: 2.883rem;
+}
+@media (min-width: 781px) {
+  h2 {
+    font-size: 5.493rem;
+  }
+}
+
+h3 {
+  font-family: "Noto Serif", serif;
+  font-weight: 400;
+  font-size: 2.278rem;
+}
+@media (min-width: 781px) {
+  h3 {
+    font-size: 2.813rem;
+  }
+}
+
+/* Anchors
+ *----------------------------------*/
+a {
+  color: inherit;
+  font-size: inherit;
+  text-decoration: underline;
+}
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+p > a {
+  text-decoration: none;
+  background: linear-gradient(to right, #FFF 0 50%, #cc00cc, #9900cc);
+  background-size: 250%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.3s ease-out;
+  text-decoration: underline;
+}
+p > a:hover, p > a:focus {
+  background-position: 100%;
+  text-decoration: none;
+}
+
 /* Buttons
  * ----------------------------------------------- */
 .btn {
@@ -539,38 +649,6 @@ body {
   background-position: 100%;
 }
 
-/* Other
- * ----------------------------------------------- */
-.sr-only {
-  border: 0 !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  -webkit-clip-path: inset(50%) !important;
-  clip-path: inset(50%) !important;
-  height: 1px !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  padding: 0 !important;
-  position: absolute !important;
-  width: 1px !important;
-  white-space: nowrap !important;
-}
-
-@keyframes blink {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-@keyframes rotate {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 /* 1rem font reset
  *----------------------------------*/
 html {
@@ -632,63 +710,23 @@ html * + section {
     flex: 1 0 auto;
     padding: 1.8rem 0 3.6rem;
   }
+}
+@media (min-width: 781px) and (min-width: 781px) {
+  .site .site__main {
+    padding: 5.4rem 0 3.6rem;
+  }
+}
+@media (min-width: 781px) {
   .site .site__footer {
     flex-shrink: 0;
   }
-}
-
-/* Font Sizes
- *----------------------------------*/
-p {
-  font-size: 1.8rem;
-  line-height: 1.5;
-}
-
-h1 {
-  font-family: "Noto Serif", serif;
-  font-weight: 400;
-  font-size: 3.649rem;
-}
-@media (min-width: 781px) {
-  h1 {
-    font-size: 6.866rem;
-  }
-}
-
-h2 {
-  font-family: "Noto Serif", serif;
-  font-weight: 400;
-  font-size: 2.883rem;
-}
-@media (min-width: 781px) {
-  h2 {
-    font-size: 5.493rem;
-  }
-}
-
-h3 {
-  font-family: "Noto Serif", serif;
-  font-weight: 400;
-  font-size: 2.278rem;
-}
-@media (min-width: 781px) {
-  h3 {
-    font-size: 2.813rem;
-  }
-}
-
-/* Anchors
- *----------------------------------*/
-a {
-  color: inherit;
-  font-size: inherit;
 }
 
 /* Containers
  *----------------------------------*/
 .container {
   margin: 0 auto;
-  padding: 0 0.9rem;
+  padding: 0 1.8rem;
   width: 100%;
   max-width: 1020px;
 }
@@ -700,7 +738,7 @@ a {
 }
 @media (min-width: 450px) {
   .container {
-    padding: 0 2.7rem;
+    padding: 0 3.6rem;
   }
 }
 @media (min-width: 781px) {
@@ -727,7 +765,7 @@ a {
 }
 @media (min-width: 781px) {
   .site__logo {
-    padding: 1.8rem 2.7rem 1.8rem;
+    padding: 1.8rem 3.6rem 1.8rem;
     border-bottom: 1px dashed #E6E6FA;
   }
 }
@@ -798,7 +836,6 @@ a {
   font-family: "Noto Serif", serif;
   font-weight: 400;
   font-size: 2rem;
-  text-decoration: none;
 }
 @media (min-width: 781px) {
   .site__nav ul li a {
@@ -807,7 +844,7 @@ a {
 }
 @media (min-width: 781px) {
   .site__nav {
-    padding: 0 2.7rem;
+    padding: 0 3.6rem;
   }
   .site__nav .nav__second-level {
     display: none;
@@ -841,7 +878,7 @@ a {
   }
   .site__nav .nav__top-level {
     margin: 0 auto;
-    padding: 0 0.9rem;
+    padding: 0 1.8rem;
     width: 100%;
     max-width: 1020px;
   }
@@ -854,7 +891,7 @@ a {
 }
 @media (max-width: 781px) and (min-width: 450px) {
   .site__nav .nav__top-level {
-    padding: 0 2.7rem;
+    padding: 0 3.6rem;
   }
 }
 @media (max-width: 781px) and (min-width: 781px) {

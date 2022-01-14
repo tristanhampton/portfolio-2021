@@ -1,0 +1,140 @@
+/* Font Sizes
+ *----------------------------------*/
+p {
+    font-size: $text-regular;
+    line-height: 1.5;
+}
+
+@mixin h1 {
+    @include ff-noto-reg;
+    font-size: $heading-1-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-1;
+    }
+}
+
+@mixin h2 {
+    @include ff-noto-reg;
+    font-size: $heading-2-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-2;
+    }
+}
+
+@mixin h3 {
+    @include ff-noto-reg;
+    font-size: $heading-3-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-3;
+    }
+}
+
+@mixin h4 {
+    @include ff-noto-reg;
+    font-size: $heading-4-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-4;
+    }
+}
+
+h1 {
+    @include h1;
+}
+
+h2 {
+    @include h2;
+}
+
+h3 {
+    @include h3;
+}
+
+
+/* Anchors
+ *----------------------------------*/
+a {
+    color: inherit;
+    font-size: inherit;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
+}
+
+p>a {
+    @include gradient-hover;
+    text-decoration: underline;
+}
+
+
+/* Buttons
+ * ----------------------------------------------- */
+@mixin btn-primary {
+    @include reset-button;
+    @include transition;
+    @include ff-lato-reg;
+    flex: 0 0 auto;
+    padding: $sp-1 $sp-2;
+    background-color: $quinary;
+    background-image: linear-gradient(120deg, $quinary, $secondary);
+    background-position: 0;
+    background-size: 200%;
+    color: $white;
+    min-width: 14rem;
+    font-size: 1.6rem;
+    text-align: center;
+
+    &:hover,
+    &:focus {
+        background-position: 100%;
+    }
+}
+
+.btn {
+    @include btn-primary;
+}
+
+@mixin btn-secondary {
+    @include reset-button;
+    @include transition;
+    @include ff-lato-reg;
+    flex: 0 0 auto;
+    padding: $sp-1 $sp-2;
+    background-color: $quinary;
+    background-image: linear-gradient(120deg, $quinary, $secondary);
+    background-position: 0;
+    background-size: 200%;
+    color: $white;
+    min-width: 14rem;
+    font-size: 1.6rem;
+    text-align: center;
+    position: relative;
+
+    span {
+        position: relative;
+        z-index: 1;
+    }
+
+    &::after {
+        display: block;
+        content: '';
+        position: absolute;
+        inset: $sp-0;
+        background-color: #212121;
+    }
+
+    &:hover,
+    &:focus {
+        background-position: 100%;
+    }
+}
+
+.btn-secondary {
+    @include btn-secondary;
+}

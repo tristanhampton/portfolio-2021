@@ -3,9 +3,6 @@
 .site__logo {
     @include h2;
     padding: $sp-2 0 $sp-2;
-    // background: -webkit-linear-gradient(#eee, #333);
-    // -webkit-background-clip: text;
-    // -webkit-text-fill-color: transparent;
 
 
     a {
@@ -90,7 +87,6 @@
 
             a {
                 @include h4;
-                text-decoration: none;
             }
         }
     }

@@ -65,6 +65,10 @@ html * {
         .site__main {
             flex: 1 0 auto;
             padding: $sp-2 0 $sp-4;
+
+            @include min-bp(layout-break) {
+                padding: $sp-6 0 $sp-4;
+            }
         }
 
         .site__footer {
@@ -73,71 +77,6 @@ html * {
     }
 }
 
-
-
-
-/* Font Sizes
- *----------------------------------*/
-p {
-    font-size: $text-regular;
-    line-height: 1.5;
-}
-
-@mixin h1 {
-    @include ff-noto-reg;
-    font-size: $heading-1-m;
-
-    @include min-bp(layout-break) {
-        font-size: $heading-1;
-    }
-}
-
-@mixin h2 {
-    @include ff-noto-reg;
-    font-size: $heading-2-m;
-
-    @include min-bp(layout-break) {
-        font-size: $heading-2;
-    }
-}
-
-@mixin h3 {
-    @include ff-noto-reg;
-    font-size: $heading-3-m;
-
-    @include min-bp(layout-break) {
-        font-size: $heading-3;
-    }
-}
-
-@mixin h4 {
-    @include ff-noto-reg;
-    font-size: $heading-4-m;
-
-    @include min-bp(layout-break) {
-        font-size: $heading-4;
-    }
-}
-
-h1 {
-    @include h1;
-}
-
-h2 {
-    @include h2;
-}
-
-h3 {
-    @include h3;
-}
-
-
-/* Anchors
- *----------------------------------*/
-a {
-    color: inherit;
-    font-size: inherit;
-}
 
 
 /* Containers

@@ -9,5 +9,6 @@ redirect: true
 site: 'https://concordia.ab.ca/cue100/'
 img_desktop: "/img/screenshots/concordia-desktop.png"
 img_mobile: "/img/screenshots/concordia-mobile.png"
+img_small: "/img/screenshots/concordia-small.png"
 permalink: "projects/concordia/"
 ---

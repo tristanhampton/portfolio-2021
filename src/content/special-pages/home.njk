@@ -21,7 +21,7 @@ permalink: "/"
 
 			{% for project in collections.project %}
 				{% if loop.index0 < 5 %}
-					<article class="project-item" style="background-image: url(../{{ project.data.img_desktop }})">
+					<article class="project-item" style="background-image: url(../{{ project.data.img_small }})">
 						<a href="{{ project.data.site if project.data.redirect else project.url }}" title="{{ project.data.title }}" target="{{ '_blank' if project.data.redirect else '' }}">
 							<h3>{{ project.data.short }}</h3>
 						</a>

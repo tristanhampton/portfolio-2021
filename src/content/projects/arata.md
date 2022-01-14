@@ -9,5 +9,6 @@ redirect: true
 site: 'http://express11.webguidecms.ca/'
 img_desktop: "/img/screenshots/arata-desktop.png"
 img_mobile: "/img/screenshots/arata-mobile.png"
+img_small: "/img/screenshots/arata-small.png"
 permalink: "projects/arata/"
 ---

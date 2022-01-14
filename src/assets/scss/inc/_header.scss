@@ -110,6 +110,7 @@
     //--- Desktop
     @include min-bp(layout-break) {
         padding: 0 $padding-tablet;
+        margin: $sp-4 0 0;
 
         //--- Top Level
         .nav__top-level {

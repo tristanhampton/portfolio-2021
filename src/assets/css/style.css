@@ -850,6 +850,7 @@ html * + section {
 @media (min-width: 781px) {
   .site__nav {
     padding: 0 3.6rem;
+    margin: 3.6rem 0 0;
   }
   .site__nav .nav__second-level {
     display: none;

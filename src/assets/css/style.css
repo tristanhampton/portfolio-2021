@@ -689,6 +689,12 @@ html * + section {
 .site.lock {
   overflow: hidden;
 }
+.site .site__content {
+  margin: 0;
+}
+.site .site__main {
+  padding: 3.6rem 0;
+}
 @media (min-width: 781px) {
   .site {
     display: flex;
@@ -703,20 +709,12 @@ html * + section {
     flex: 1 1 calc(100% - 35rem);
     display: flex;
     flex-direction: column;
-    margin: 0;
     min-width: 40rem;
   }
   .site .site__main {
     flex: 1 0 auto;
-    padding: 1.8rem 0 3.6rem;
-  }
-}
-@media (min-width: 781px) and (min-width: 781px) {
-  .site .site__main {
     padding: 5.4rem 0 3.6rem;
   }
-}
-@media (min-width: 781px) {
   .site .site__footer {
     flex-shrink: 0;
   }
@@ -797,15 +795,22 @@ html * + section {
   top: calc(50% - 1px);
   left: 0;
   background-color: #FFF;
+  transform-origin: 0 0;
 }
 .menu-toggle.active {
   border-color: transparent;
+}
+.menu-toggle.active::before, .menu-toggle.active::after {
+  transform-origin: 50%;
 }
 .menu-toggle.active::before {
   transform: rotate(45deg);
 }
 .menu-toggle.active::after {
   transform: rotate(-45deg);
+}
+.menu-toggle:not(.active):hover::before, .menu-toggle:not(.active):hover:after, .menu-toggle:not(.active):focus::before, .menu-toggle:not(.active):focus:after {
+  transform: scaleX(0.65);
 }
 @media (min-width: 781px) {
   .menu-toggle {

@@ -38,10 +38,16 @@
         top: calc(50% - 1px);
         left: 0;
         background-color: $white;
+        transform-origin: 0 0;
     }
 
     &.active {
         border-color: transparent;
+
+        &::before,
+        &::after {
+            transform-origin: 50%;
+        }
 
         &::before {
             transform: rotate(45deg);
@@ -49,6 +55,15 @@
 
         &::after {
             transform: rotate(-45deg);
+        }
+    }
+
+    &:not(.active):hover,
+    &:not(.active):focus {
+
+        &::before,
+        &:after {
+            transform: scaleX(0.65);
         }
     }
 

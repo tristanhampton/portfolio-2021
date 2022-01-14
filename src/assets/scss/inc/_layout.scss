@@ -43,6 +43,14 @@ html * {
         overflow: hidden;
     }
 
+    .site__content {
+        margin: 0;
+    }
+
+    .site__main {
+        padding: $sp-4 0;
+    }
+
     @include min-bp(layout-break) {
         display: flex;
         min-height: 100vh;
@@ -57,18 +65,13 @@ html * {
             flex: 1 1 calc(100% - 35rem);
             display: flex;
             flex-direction: column;
-            margin: 0;
             min-width: 40rem;
         }
 
         //--- Sticky Footer
         .site__main {
             flex: 1 0 auto;
-            padding: $sp-2 0 $sp-4;
-
-            @include min-bp(layout-break) {
-                padding: $sp-6 0 $sp-4;
-            }
+            padding: $sp-6 0 $sp-4;
         }
 
         .site__footer {

@@ -1,0 +1,243 @@
+.home__projects {
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $sp-1 $sp-1;
+    }
+
+    h2,
+    p {
+        width: 100%;
+    }
+
+    p:last-of-type {
+        margin-bottom: $sp-3;
+    }
+
+
+
+    +section {
+        margin-top: ($sp-10 + $sp-3);
+    }
+}
+
+.project-item {
+    display: block;
+    background-color: $secondary;
+    color: $secondary;
+    background-size: 100%;
+    background-position: top left;
+    background-repeat: no-repeat;
+    margin: 0;
+    aspect-ratio: 1 / 2;
+
+    a {
+        display: block;
+        padding: $sp-2;
+        text-decoration: none;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    h3 {
+        @include h4;
+        @include transition;
+        transform-origin: 0 100%;
+        transform: rotate(90deg) translateY(3.8rem);
+        color: $white;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 150%;
+    }
+
+    @mixin tile-two {
+        flex: 0 0 calc(50% - 0.5rem);
+
+        //--- Color
+        &:nth-of-type(4n) {
+            background-color: $tertiary;
+            color: $tertiary
+        }
+
+        &:nth-of-type(4n+1) {
+            background-color: $quaternary;
+            color: $quaternary
+        }
+
+        &:nth-of-type(4n+2) {
+            background-color: $quinary;
+            color: $quinary
+        }
+
+        //--- Spacing
+        &:nth-of-type(2n+2) {
+            transform: translateY(#{$sp-2});
+        }
+    }
+
+    @mixin tile-three {
+        flex: 0 0 calc(33.333% - 0.6rem);
+
+        //--- Color
+        &:nth-of-type(4n) {
+            background-color: $tertiary;
+            color: $tertiary
+        }
+
+        &:nth-of-type(4n+1) {
+            background-color: $quaternary;
+            color: $quaternary
+        }
+
+        &:nth-of-type(4n+2) {
+            background-color: $tertiary;
+            color: $tertiary
+        }
+
+        //--- Spacing
+        &:nth-of-type(3n+2) {
+            transform: translateY(#{$sp-2});
+        }
+    }
+
+    @mixin tile-five {
+        flex: 0 0 calc(20% - 0.8rem);
+
+        //--- Color
+        &:nth-of-type(4n) {
+            background-color: $tertiary;
+            color: $tertiary
+        }
+
+        &:nth-of-type(4n+1) {
+            background-color: $quaternary;
+            color: $quaternary
+        }
+
+        &:nth-of-type(4n+2) {
+            background-color: $tertiary;
+            color: $tertiary
+        }
+
+        //--- Spacing
+        &:nth-of-type(5n+2) {
+            transform: translateY(#{$sp-4});
+        }
+
+        &:nth-of-type(5n+3) {
+            transform: translateY(#{$sp-2});
+        }
+
+        &:nth-of-type(5n+4) {
+            transform: translateY(#{$sp-4});
+        }
+
+        &:nth-of-type(5n+4) {
+            // transform: translateY(#{$sp-2});
+        }
+    }
+
+    @include bp(525) {
+        @include tile-two;
+    }
+
+    @include bp-range(525, layout-break) {
+        @include tile-three;
+    }
+
+    @include bp-range(layout-break, desktop) {
+        @include tile-two
+    }
+
+    @include bp-range(desktop, 1200) {
+        @include tile-three
+    }
+
+    @include min-bp(1200) {
+        @include tile-five;
+    }
+
+    //--- With Image
+    background-image: none;
+    position: relative;
+
+    &::after {
+        display: block;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to left, currentColor, transparent);
+    }
+
+    a {
+        position: relative;
+        z-index: 1;
+    }
+
+    //--- Hover
+    &:hover,
+    &:focus {
+        h3 {
+            transform: rotate(90deg) translateY(3.8rem) translateX(#{$sp-4});
+        }
+    }
+}
+
+
+.feature-grid {
+    @include reset-ul;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    margin-top: $sp-4;
+
+    li {
+        @include h3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: $sp-1;
+        flex: 1 1 20%;
+        margin: 0;
+        padding: $sp-4;
+        border: $border;
+        aspect-ratio: 1 / 1;
+        min-width: 16rem;
+        max-width: 32rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+
+        &.has-content {
+            min-width: 22rem;
+
+            h3 {
+                @include h4;
+            }
+        }
+    }
+
+    h3+a {
+        margin-top: $sp-2;
+    }
+
+    .favourite {
+        display: block;
+        width: 0;
+        height: 0;
+        border: $sp-4 solid transparent;
+        border-bottom: $sp-4 solid $quinary;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translateY(-#{$sp-4}) translateX(#{$sp-4}) rotate(45deg);
+    }
+}

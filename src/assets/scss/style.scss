@@ -1,0 +1,13 @@
+@import "global/reset";
+@import "global/breakpoints";
+@import "global/mixins";
+@import "global/global";
+@import "global/animations";
+
+
+@import "inc/layout";
+@import "inc/header";
+@import "inc/footer";
+@import "inc/home";
+@import "inc/archive";
+@import "inc/single";

@@ -1,0 +1,38 @@
+{% set navPages = collections.all | eleventyNavigation %}
+<nav class="site__nav">
+	<ul class="nav__top-level">
+		{# Top Level #}
+		{% for entry in navPages %}
+			<li class="{% if entry.url == page.url or entry.url in page.url %}active{% endif %} {% if entry.children != '' %}children{% endif %}">
+				<a href="{{ entry.url | url }}">{{ entry.title }}</a>
+
+				{% if entry.children != '' %}
+					{# Second Level #}
+					<button class="toggle"></button>
+					<ul class="nav__second-level">
+					{% for child in entry.children %}
+						<li class="{% if child.url == page.url %}active{% endif %} {% if child.children != '' %}children{% endif %}">
+							<a href="{{ child.url | url }}">{{ child.title }}</a>
+
+							{% if child.children != '' %}
+								{# Third Level #}
+								<button class="toggle"></button>
+								<ul class="nav__third-level">
+									{% for final_child in child.children %}	
+										<li class="{% if final_child.url == page.url %}active{% endif %} {% if final_child.children != '' %}children{% endif %}">
+											<a href="{{ final_child.url | url }}">{{ final_child.title }}</a>
+										</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</li>
+					{% endfor %}
+					</ul>
+				{% endif %}
+
+			</li>
+		{% endfor %}
+
+		<li><a href="https://github.com/tristanhampton/" target="_blank">GitHub</a></li>
+	</ul>
+</nav>

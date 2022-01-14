@@ -1,0 +1,170 @@
+/* 1rem font reset
+ *----------------------------------*/
+html {
+    font-size: 16px;
+    font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/* Spacing
+ *----------------------------------*/
+html * {
+    +* {
+        margin-top: $sp-2;
+    }
+
+    +h1,
+    +h2,
+    +h3 {
+        margin-top: $sp-4;
+    }
+
+    +section {
+        margin-top: $sp-10;
+    }
+}
+
+
+/* Page Layout
+ *----------------------------------*/
+.site {
+    @include ff-lato-reg;
+    margin: 0;
+    background-color: #212121;
+    color: #F9F9F9;
+    font-size: $text-small;
+
+    &.lock {
+        overflow: hidden;
+    }
+
+    @include min-bp(layout-break) {
+        display: flex;
+        min-height: 100vh;
+        font-size: $text-regular;
+
+        .site__header {
+            flex: 0 1 35rem;
+            min-width: 20rem;
+        }
+
+        .site__content {
+            flex: 1 1 calc(100% - 35rem);
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            min-width: 40rem;
+        }
+
+        //--- Sticky Footer
+        .site__main {
+            flex: 1 0 auto;
+            padding: $sp-2 0 $sp-4;
+        }
+
+        .site__footer {
+            flex-shrink: 0;
+        }
+    }
+}
+
+
+
+
+/* Font Sizes
+ *----------------------------------*/
+p {
+    font-size: $text-regular;
+    line-height: 1.5;
+}
+
+@mixin h1 {
+    @include ff-noto-reg;
+    font-size: $heading-1-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-1;
+    }
+}
+
+@mixin h2 {
+    @include ff-noto-reg;
+    font-size: $heading-2-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-2;
+    }
+}
+
+@mixin h3 {
+    @include ff-noto-reg;
+    font-size: $heading-3-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-3;
+    }
+}
+
+@mixin h4 {
+    @include ff-noto-reg;
+    font-size: $heading-4-m;
+
+    @include min-bp(layout-break) {
+        font-size: $heading-4;
+    }
+}
+
+h1 {
+    @include h1;
+}
+
+h2 {
+    @include h2;
+}
+
+h3 {
+    @include h3;
+}
+
+
+/* Anchors
+ *----------------------------------*/
+a {
+    color: inherit;
+    font-size: inherit;
+}
+
+
+/* Containers
+ *----------------------------------*/
+@mixin container {
+    margin: 0 auto;
+    padding: 0 $padding-mobile;
+    width: 100%;
+    max-width: $container;
+
+    &.width--narrow {
+        max-width: $container-narrow;
+    }
+
+    &.width--wide {
+        max-width: $container-wide;
+    }
+
+    @include min-bp(mobile-switch) {
+        padding: 0 $padding-tablet;
+    }
+
+    @include min-bp(layout-break) {
+        padding: 0 $padding-desktop;
+    }
+}
+
+.container {
+    @include container;
+}

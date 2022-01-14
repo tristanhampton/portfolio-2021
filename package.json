@@ -1,0 +1,19 @@
+{
+  "name": "11ty-starter-tristan",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eleventy.js",
+  "scripts": {
+    "build": "sass src/assets/scss/style.scss:src/assets/css/style.css && npx @11ty/eleventy",
+    "watch": "sass --watch src/assets/scss/style.scss:src/assets/css/style.css",
+    "dev": "npx @11ty/eleventy --serve"
+  },
+  "keywords": [],
+  "author": "Tristan Hampton",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy-navigation": "^0.1.6",
+    "sass": "^1.32.8"
+  }
+}

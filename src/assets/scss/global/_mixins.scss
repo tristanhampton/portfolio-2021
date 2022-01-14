@@ -1,0 +1,53 @@
+/* Psuedo Elements
+ *----------------------------------*/
+@mixin psuedo--before {
+    position: relative;
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+@mixin psuedo--after {
+    position: relative;
+
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+
+/* Resets
+ * ----------------------------------------------- */
+@mixin reset-button {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    appearance: none;
+    text-decoration: none;
+    background: none;
+}
+
+@mixin reset-ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+/* Other
+ * ----------------------------------------------- */
+@mixin transition($speed: .3s) {
+    transition: $speed ease-out;
+}

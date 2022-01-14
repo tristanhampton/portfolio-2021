@@ -1,0 +1,24 @@
+{% include 'head.njk' %}
+{% include 'header.njk' %}
+
+<div class="site__content">
+	<main class="site__main main--single">
+		<header class="single__header">
+			<div class="container">
+				<h2>{{ title }}</h2>
+				<a href="{{ site }}" target="_blank" class="btn">View Site</a>
+			</div>
+		</header>
+
+		<section>
+			<div class="container">
+				{{ content | safe }}
+			</div>
+		</section>
+	</main>
+		
+	{% include 'footer.njk' %}
+</div>
+</body>
+</html>
+

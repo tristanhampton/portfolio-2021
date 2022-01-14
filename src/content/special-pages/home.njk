@@ -1,0 +1,80 @@
+---
+layout: default
+siteTitle: "Tristan Hampton"
+title: "Home"
+permalink: "/"
+---
+
+
+<main class="site__main main--home">
+	<section class="home__intro">
+		<div class="container">
+			<h2>Hello!</h2>
+			<p>I am a Front End Developer from Edmonton, Alberta. Most sites I build are done with vanilla javascript, scss, and php. However, I do have experience building WordPress themes, static sites with 11ty (that's what this site is!), and I've even built sites using Django and Python! </p>
+		</div>
+	</section>
+
+	<section class="home__projects">
+		<div class="container">
+			<h2>Projects</h2>
+			<p>I've had the wonderful opportunity to work at <a href="https://boxclever.ca" target="_blank">Box Clever</a> and work on many exciting projects. Below are some of my favourites, and if you'd like to see more you can <a href="/projects">check out my project archive.</a></p>
+
+			{% for project in collections.project %}
+				{% if loop.index0 < 5 %}
+					<article class="project-item" style="background-image: url(../{{ project.data.img_desktop }})">
+						<a href="{{ project.data.site if project.data.redirect else project.url }}" title="{{ project.data.title }}" target="{{ '_blank' if project.data.redirect else '' }}">
+							<h3>{{ project.data.short }}</h3>
+						</a>
+					</article>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</section>
+
+	<section class="home__tools">
+		<div class="container">
+			<h2>Tools and Experience</h2>
+			<p>I've worked with many different tools to complete projects. I've listed noteable ones below, and marked my favourites with a neon flag.</p>
+
+			<ul class="feature-grid">
+				<li>scss <span class="favourite"><span class="sr-only">Favourite</span></span></li>
+				<li>jQuery</li>
+				<li>Git</li>
+				<li>Vanilla JavaScript <span class="favourite"><span class="sr-only">Favourite</span></span></li>
+				<li>Accessible HTML</li>
+				<li>PHP</li>
+				<li>11ty <span class="favourite"><span class="sr-only">Favourite</span></span></li>
+				<li>Rest API</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="home__bits">
+		<div class="container">
+			<h2>Bits and Bytes</h2>
+			<p>I like to play around with other, smaller experimental projects. It's a wonderful way to learn new things and expand my knowledge. You never know what concepts might be applicable on another project!</p>
+
+			<ul class="feature-grid">
+				<li class="has-content">
+					<h3>Forestry/11ty CMS</h3>
+					<a href="https://forestry-eleventy.netlify.app/" target="_blank" class="btn">Project</a>
+					<a href="https://github.com/tristanhampton/11ty-copywriter-theme" target="_blank" class="btn-secondary"><span>View Code</span></a>
+				</li>
+				<li class="has-content">
+					<h3>Canvas Sketching</h3>
+					<a href="https://js-sketches.netlify.app/sketches/sketch-04" target="_blank" class="btn">Project</a>
+					<a href="https://github.com/tristanhampton/sketches" target="_blank" class="btn-secondary"><span>View Code</span></a>
+				</li>
+				<li class="has-content">
+					<h3>Home Media Player</h3>
+					<a href="https://github.com/tristanhampton/home-media-player" target="_blank" class="btn">View Code</a>
+				</li>
+
+				<li class="has-content">
+					<h3>Gists Collection</h3>
+					<a class="btn" href="https://gist.github.com/tristanhampton" target="_target" title="View all Gists on Github">View Gists</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+</main>

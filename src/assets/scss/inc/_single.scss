@@ -1,0 +1,47 @@
+.single__header {
+    padding: 0 0 $sp-2;
+    border-bottom: $border;
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: $sp-2 $sp-4;
+    }
+
+    h2 {
+        flex: 1 1 calc(100% - 20rem);
+        min-width: 40rem;
+    }
+
+    +section {
+        margin-top: $sp-4;
+    }
+}
+
+.single__image {
+    display: block;
+    width: 100%;
+
+    @include min-bp(mid-tablet) {
+        &.position--left {
+            float: left;
+            max-width: 32rem;
+            margin: $sp-3 $sp-3 $sp-3 0;
+        }
+
+        &.position--right {
+            float: left;
+            max-width: 32rem;
+            margin: $sp-3 0 $sp-3 $sp-3;
+        }
+    }
+}
+
+
+.main--projects {
+    h2 {
+        margin-bottom: $sp-4;
+    }
+}

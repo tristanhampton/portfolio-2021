@@ -1,0 +1,63 @@
+$breakpoints: ('desktop' : 1020px,
+'tablet' : 800px,
+'tablet-switch' : 750px,
+'mid-tablet' : 600px,
+'mobile-switch' : 450px,
+'mobile-small' : 375px,
+
+'layout-break' : 781px,
+'menu-break' : 1020px,
+);
+
+@mixin bp($max-width) {
+    @if map-get($breakpoints, $max-width) !=null {
+        @media(max-width: #{map-get($breakpoints, $max-width)}) {
+            @content;
+        }
+    }
+
+    @else if type-of($max-width)=='number' {
+        @media(max-width: $max-width * 1px) {
+            @content;
+        }
+    }
+}
+
+@mixin min-bp($min-width) {
+    @if map-get($breakpoints, $min-width) !=null {
+        @media(min-width: #{map-get($breakpoints, $min-width)}) {
+            @content;
+        }
+    }
+
+    @else if type-of($min-width)=='number' {
+        @media(min-width: $min-width * 1px) {
+            @content;
+        }
+    }
+}
+
+@mixin bp-range($min-width, $max-width) {
+    $range-min: 1;
+    $range-max: 1;
+
+    @if map-get($breakpoints, $min-width) !=null {
+        $range-min: map-get($breakpoints, $min-width);
+    }
+
+    @else if type-of($min-width)=='number' {
+        $range-min: $min-width * 1px;
+    }
+
+    @if map-get($breakpoints, $max-width) !=null {
+        $range-max: map-get($breakpoints, $max-width);
+    }
+
+    @else if type-of($max-width)=='number' {
+        $range-max: $max-width * 1px;
+    }
+
+    @media (min-width:#{$range-min + 1}) and (max-width:#{$range-max}) {
+        @content;
+    }
+}

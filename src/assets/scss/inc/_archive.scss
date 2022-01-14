@@ -1,0 +1,13 @@
+.main--projects {
+
+    h2,
+    p {
+        width: 100%;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $sp-1;
+    }
+}

@@ -1,0 +1,15 @@
+footer {
+	padding: 4rem 0;
+
+	.credit,
+	.attribution {
+		font-size: 1.4rem;
+		text-align: right;
+		opacity: .6;
+
+		a {
+			color: inherit;
+			font-size: inherit;
+		}
+	}
+}

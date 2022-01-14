@@ -1,0 +1,27 @@
+---
+layout: default
+siteTitle: "Tristan Hampton"
+title: "Projects"
+eleventyNavigation:
+  key: Projects
+  parent: ''
+  order: 6
+permalink: "/projects/"
+---
+
+<main class="site__main main--projects">
+	<section class="intro">
+		<div class="container">
+			<h2>Projects</h2>
+			
+			{% for project in collections.project %}
+					<article class="project-item" style="background-image: url(../{{ project.data.img_desktop }})">
+						<a href="{{ project.data.site if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
+							<h3>{{ project.data.short }}</h3>
+						</a>
+					</article>
+			{% endfor %}
+	</section>
+
+
+</main>

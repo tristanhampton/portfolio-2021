@@ -30,6 +30,50 @@ html * {
 }
 
 
+/* Canvas
+ * ----------------------------------------------- */
+.site {
+
+    >canvas {
+        transition: opacity 0.3s ease-out;
+        transition-delay: .3s;
+        width: 300px !important;
+        height: 300px !important;
+    }
+
+    @include min-bp(layout-break) {
+        >canvas {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+    }
+
+    @include bp(layout-break) {
+        canvas {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        &.lock {
+            canvas {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                z-index: 15;
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .site__nav {
+                padding-bottom: 30rem;
+            }
+        }
+    }
+}
+
+
 /* Page Layout
  *----------------------------------*/
 .site {

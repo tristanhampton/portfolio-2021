@@ -676,6 +676,40 @@ html * + section {
   margin-top: 9rem;
 }
 
+/* Canvas
+ * ----------------------------------------------- */
+.site > canvas {
+  transition: opacity 0.3s ease-out;
+  transition-delay: 0.3s;
+  width: 300px !important;
+  height: 300px !important;
+}
+@media (min-width: 781px) {
+  .site > canvas {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+@media (max-width: 781px) {
+  .site canvas {
+    visibility: hidden;
+    opacity: 0;
+  }
+  .site.lock canvas {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    visibility: visible;
+    opacity: 1;
+  }
+  .site.lock .site__nav {
+    padding-bottom: 30rem;
+  }
+}
+
 /* Page Layout
  *----------------------------------*/
 .site {

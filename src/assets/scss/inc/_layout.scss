@@ -51,13 +51,13 @@ html * {
     }
 
     @include bp(layout-break) {
-        canvas {
+        >canvas {
             visibility: hidden;
             opacity: 0;
         }
 
         &.lock {
-            canvas {
+            >canvas {
                 position: fixed;
                 bottom: 0;
                 left: 0;
@@ -71,10 +71,6 @@ html * {
             }
         }
     }
-}
-
-canvas {
-    margin: 0;
 }
 
 
@@ -151,6 +147,11 @@ canvas {
         align-items: center;
         justify-content: center;
         min-height: 100%;
+
+        canvas {
+            margin: 0;
+            box-shadow: 2px 2px 10px rgba(#FFF, 0.2);
+        }
     }
 
     @include min-bp(mobile-switch) {

@@ -1,20 +1,20 @@
 let walkers = [];
 
 function setup() {
-    const size = min(windowWidth, windowHeight) * 0.7;
+    const size = min(windowWidth, windowHeight);
     const canvas = createCanvas(size, size);
-    canvas.parent('canvasContainer');
+    const parent = canvas.parent('canvasContainer');
+    resizeCanvas(parent.width, parent.width)
     walkers.push(new Pencil());
     noStroke();
     draw();
 }
 
 function windowResized() {
-    const size = min(windowWidth, windowHeight) * 0.7;
-    resizeCanvas(size, size);
-    clear();
+    // Do resizing things here
 }
 
+// Handles click events
 function mouseClicked() {
     const x = mouseX;
     const y = mouseY;
@@ -22,6 +22,7 @@ function mouseClicked() {
     walkers.push(new Pencil(x, y));
 }
 
+// Handles touch events on mobile
 function touchStarted() {
     const x = touches[0].x;
     const y = touches[0].y;

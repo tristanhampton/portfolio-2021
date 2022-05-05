@@ -710,6 +710,10 @@ html * + section {
   }
 }
 
+canvas {
+  margin: 0;
+}
+
 /* Page Layout
  *----------------------------------*/
 .site {
@@ -767,6 +771,12 @@ html * + section {
 }
 .container.width--wide {
   max-width: 1200px;
+}
+.container.type--canvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
 }
 @media (min-width: 450px) {
   .container {
@@ -927,6 +937,12 @@ html * + section {
   }
   .site__nav .nav__top-level.width--wide {
     max-width: 1200px;
+  }
+  .site__nav .nav__top-level.type--canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
   }
 }
 @media (max-width: 781px) and (min-width: 450px) {

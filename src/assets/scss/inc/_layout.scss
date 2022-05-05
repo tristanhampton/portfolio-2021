@@ -73,6 +73,10 @@ html * {
     }
 }
 
+canvas {
+    margin: 0;
+}
+
 
 /* Page Layout
  *----------------------------------*/
@@ -140,6 +144,13 @@ html * {
 
     &.width--wide {
         max-width: $container-wide;
+    }
+
+    &.type--canvas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
     }
 
     @include min-bp(mobile-switch) {

@@ -1,0 +1,12 @@
+{% include 'head.njk' %}
+{% include 'header.njk' %}
+
+<div class="site__content">
+	<div class="container type--canvas" id="canvasContainer">
+		{{ content | safe }}
+	</div>
+		
+	{% include 'footer.njk' %}
+</div>
+</body>
+</html>

@@ -22,6 +22,13 @@ function mouseClicked() {
     walkers.push(new Pencil(x, y));
 }
 
+function touchStarted() {
+    const x = touches[0].x;
+    const y = touches[0].y;
+
+    walkers.push(new Pencil(x, y));
+}
+
 function draw() {
     walkers.forEach(walker => {
         if (!walker.isOut()) {

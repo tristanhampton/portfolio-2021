@@ -24,7 +24,9 @@ permalink: "/generative/"
 
 			<ul>
 				{% for project in collections.generative %}
-					<li class="h3 generative-item"><a href="{{ project.url }}" class="gradient-hover" title="{{ project.data.title }}">{{ project.data.title }}</a></li>
+					{% if project.data.published %}
+						<li class="h3 generative-item"><a href="{{ project.url }}" class="gradient-hover" title="{{ project.data.title }}">{{ project.data.title }}</a></li>
+					{% endif %}
 				{% endfor %}
 			</ul>
 

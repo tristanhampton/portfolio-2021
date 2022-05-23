@@ -5,20 +5,23 @@ date: 2022-04-15
 layout: canvas
 title: Pencil Crayon Walkers
 permalink: "generative/pencil-walkers/"
+published: true
 eleventyNavigation:
   key: Pencil Walkers
   parent: 'generative'
   order: 1
 ---
-<main class="site__main main--projects">
+<main class="site__main">
 
 	<section class="intro">
 		<div class="container">
-			<h2>Pencil Crayon Walkers</h2>
+			<h1>{{ title }}</h1>
+			<p>Click on the canvas! Walkers will move about, with a random colour and pencil weight.</p>
+		</div>
 	</section>
 
 	<div class="container type--canvas" id="canvasContainer"></div>
 
 </main>
 
-<script src="/js/processing/walker-pencil.js"></script>
+<script src="/js/generative/walker-pencil.js"></script>

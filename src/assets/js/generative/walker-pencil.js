@@ -5,7 +5,7 @@ function setup() {
     const canvas = createCanvas(size, size);
     const parent = canvas.parent('canvasContainer');
     resizeCanvas(parent.width, parent.width)
-    walkers.push(new Pencil());
+
     noStroke();
     draw();
 }

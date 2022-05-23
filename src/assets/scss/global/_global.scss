@@ -128,4 +128,8 @@ $border: 1px dashed $primary;
     position: absolute !important;
     width: 1px !important;
     white-space: nowrap !important;
+
+    +* {
+        margin-top: 0;
+    }
  }

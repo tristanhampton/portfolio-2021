@@ -501,6 +501,9 @@ body {
   width: 1px !important;
   white-space: nowrap !important;
 }
+.sr-only + * {
+  margin-top: 0;
+}
 
 @keyframes blink {
   from {
@@ -525,35 +528,41 @@ p {
   line-height: 1.5;
 }
 
-h1 {
-  font-family: "Noto Serif", serif;
-  font-weight: 400;
-  font-size: 3.649rem;
-}
-@media (min-width: 781px) {
-  h1 {
-    font-size: 6.866rem;
-  }
-}
-
-h2 {
+h1,
+.h1 {
   font-family: "Noto Serif", serif;
   font-weight: 400;
   font-size: 2.883rem;
 }
 @media (min-width: 781px) {
-  h2 {
+  h1,
+.h1 {
     font-size: 5.493rem;
   }
 }
 
-h3 {
+h2,
+.h2 {
+  font-family: "Noto Serif", serif;
+  font-weight: 400;
+  font-size: 2.883rem;
+}
+@media (min-width: 781px) {
+  h2,
+.h2 {
+    font-size: 5.493rem;
+  }
+}
+
+h3,
+.h3 {
   font-family: "Noto Serif", serif;
   font-weight: 400;
   font-size: 2.278rem;
 }
 @media (min-width: 781px) {
-  h3 {
+  h3,
+.h3 {
     font-size: 2.813rem;
   }
 }
@@ -795,15 +804,14 @@ html * + section {
   font-family: "Noto Serif", serif;
   font-weight: 400;
   font-size: 2.883rem;
+  display: block;
   padding: 1.8rem 0 1.8rem;
+  text-decoration: none;
 }
 @media (min-width: 781px) {
   .site__logo {
     font-size: 5.493rem;
   }
-}
-.site__logo a {
-  text-decoration: none;
 }
 @media (min-width: 781px) {
   .site__logo {

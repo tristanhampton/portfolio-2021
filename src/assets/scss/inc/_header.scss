@@ -2,12 +2,9 @@
  * ----------------------------------------------- */
 .site__logo {
     @include h2;
+    display: block;
     padding: $sp-2 0 $sp-2;
-
-
-    a {
-        text-decoration: none;
-    }
+    text-decoration: none;
 
     @include min-bp(layout-break) {
         padding: $sp-2 $padding-tablet $sp-2;

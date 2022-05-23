@@ -12,15 +12,22 @@ permalink: "/projects/"
 <main class="site__main main--projects">
 	<section class="intro">
 		<div class="container">
-			<h2>Projects</h2>
+			<h1>Projects</h1>
 			
+	</section>
+
+	<section class="list">
+		<div class="container">
+			<h2 class="sr-only">List of Projects</h2>
+
 			{% for project in collections.project %}
-					<article class="project-item" style="background-image: url(../{{ project.data.img_small }})">
-						<a href="{{ project.data.site if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
-							<h3>{{ project.data.short }}</h3>
-						</a>
-					</article>
+				<article class="project-item" style="background-image: url(../{{ project.data.img_small }})">
+					<a href="{{ project.data.site if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
+						<h3>{{ project.data.short }}</h3>
+					</a>
+				</article>
 			{% endfor %}
+		</div>
 	</section>
 
 

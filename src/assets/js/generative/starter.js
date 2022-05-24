@@ -1,5 +1,3 @@
-let walkers = [];
-
 function setup() {
     const size = min(windowWidth, windowHeight);
     const canvas = createCanvas(size, size);

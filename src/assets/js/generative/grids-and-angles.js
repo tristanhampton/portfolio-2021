@@ -12,8 +12,7 @@ function setup() {
   noLoop();
   setCanvasWidth();
   
-  const size = min(settings.canvasWidth, settings.canvasHeight);
-  const canvas = createCanvas(size, size);
+  const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
   canvas.parent('canvasContainer');
 
   settings.gap = 0.05 * settings.canvasWidth;

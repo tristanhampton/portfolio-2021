@@ -1,10 +1,14 @@
 let walkers = [];
 
+const settings = {
+    canvasWidth: null,
+    canvasHeight: null,
+};
+
 function setup() {
-    const size = min(windowWidth, windowHeight);
-    const canvas = createCanvas(size, size);
-    const parent = canvas.parent('canvasContainer');
-    resizeCanvas(parent.width, parent.width)
+    setCanvasWidth();
+    const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
+    canvas.parent('canvasContainer');
 
     noStroke();
     draw();
@@ -94,4 +98,30 @@ class Pencil {
             circle(this.x + random(this.minWeight, this.maxWeight), this.y + random(this.minWeight, this.maxWeight), 2, 2);
         }
     }
+}
+
+function getStyle(oElm, strCssRule) {
+    var strValue = "";
+    if (document.defaultView && document.defaultView.getComputedStyle) {
+        strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+    }
+    else if (oElm.currentStyle) {
+        strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1) {
+            return p1.toUpperCase();
+        });
+        strValue = oElm.currentStyle[strCssRule];
+    }
+
+    strValue = strValue.replace('px', '');
+    return strValue;
+}
+
+function setCanvasWidth() {
+    const container = document.querySelector('#canvasContainer');
+    const width = container.offsetWidth;
+    const padding = getStyle(container, 'padding-left');
+
+    // I want a perfect square, so set height the same
+    settings.canvasWidth = width - padding - padding;
+    settings.canvasHeight = width - padding - padding;
 }

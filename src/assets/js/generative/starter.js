@@ -1,11 +1,13 @@
-function setup() {
-    const size = min(windowWidth, windowHeight);
-    const canvas = createCanvas(size, size);
-    const parent = canvas.parent('canvasContainer');
-    resizeCanvas(parent.width, parent.width)
+const settings = {
+    canvasWidth: null,
+    canvasHeight: null,
+};
 
-    noStroke();
-    draw();
+function setup() {
+    setCanvasWidth();
+    const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
+    const parent = canvas.parent('canvasContainer');
+
 }
 
 function draw() {

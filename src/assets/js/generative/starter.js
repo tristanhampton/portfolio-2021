@@ -6,7 +6,7 @@ const settings = {
 function setup() {
     setCanvasWidth();
     const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
-    const parent = canvas.parent('canvasContainer');
+    canvas.parent('canvasContainer');
 
 }
 

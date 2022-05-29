@@ -242,7 +242,7 @@ cellSettings.addInput(settings, 'cellsY', {min: 2, max:12, step: 1})
 cellSettings.addInput(settings, 'cellGapRate', {min: 0.00, max: 0.10, step: 0.005})
 const lineSettings = pane.addFolder({title: 'Line Settings'});
 lineSettings.addInput(settings, 'lineGap', {min: 1, max: 30, step: 1})
-lineSettings.addInput(settings, 'curvesPerLine', {min: 1, max: 500, step: 1})
+lineSettings.addInput(settings, 'curvesPerLine', {min: 1, max: 50, step: 1})
 lineSettings.addInput(settings, 'lineNoise', { min: 1, max: 60, step: 1 })
 
 pane.on('change', function () {

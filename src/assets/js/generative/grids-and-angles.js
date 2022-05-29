@@ -2,10 +2,12 @@ const settings = {
   canvasWidth: null,
   canvasHeight: null,
   gap: null,
+  cellGapRate: 0.05,
   lineGap: 3,
   curvesPerLine: 10,
   cellsX: 3,
   cellsY: 3,
+  lineNoise: 5,
 }
 
 let boxes = [];
@@ -16,15 +18,17 @@ function setup() {
   
   const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
   canvas.parent('canvasContainer');
+  canvas.mouseClicked(redraw);
 
-  settings.gap = 0.05 * settings.canvasWidth;
 }
 
 function draw() {
+  settings.gap = settings.cellGapRate * settings.canvasWidth;
+  boxes = []
   noStroke();
   background('#f5f1e6');
   buildGrid();
-
+  
   boxes.forEach(box => {
     box.draw();
   });
@@ -54,8 +58,6 @@ class Box {
   noisyLine(x1,y1,x2,y2, points) {
     noFill();
     strokeWeight(1);
-    let xDist = x2 - x1;
-    let yDist = y2 - y1;
     let distance = Math.hypot(x2 - x1, y2 - y1);
     let steps = distance/points;
 
@@ -77,7 +79,7 @@ class Box {
     curveVertex(x1,y1);
     curveVertex(x1,y1);
     for (let i=1; i < points; i++) {
-      let noiseAlteration = noise(i + getRandomInt(-5, 5)) * 5;
+      let noiseAlteration = noise(i + getRandomInt(-5, 5)) * settings.lineNoise;
 
       if (vertical)
         curveVertex(x1+noiseAlteration, y1+steps*i);
@@ -232,3 +234,17 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+const pane = new Tweakpane.Pane({ title: 'Settings', container: document.querySelector('.project__tweak-settings .container')})
+const cellSettings = pane.addFolder({title: 'Cell Settings'});
+cellSettings.addInput(settings, 'cellsX', { min: 2, max: 12, step: 1 })
+cellSettings.addInput(settings, 'cellsY', {min: 2, max:12, step: 1})
+cellSettings.addInput(settings, 'cellGapRate', {min: 0.00, max: 0.10, step: 0.005})
+const lineSettings = pane.addFolder({title: 'Line Settings'});
+lineSettings.addInput(settings, 'lineGap', {min: 1, max: 30, step: 1})
+lineSettings.addInput(settings, 'curvesPerLine', {min: 1, max: 500, step: 1})
+lineSettings.addInput(settings, 'lineNoise', { min: 1, max: 60, step: 1 })
+
+pane.on('change', function () {
+  redraw();
+});

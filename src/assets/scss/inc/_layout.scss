@@ -13,7 +13,9 @@ html {
 
 /* Spacing
  *----------------------------------*/
-html * {
+.site__header *,
+section:not(.project__tweak-settings) * {
+
     +* {
         margin-top: $sp-2;
     }
@@ -165,4 +167,10 @@ html * {
 
 .container {
     @include container;
+}
+
+section {
+    + .section--basic {
+        margin-top: 6rem;
+    }
 }

@@ -673,15 +673,20 @@ html {
 
 /* Spacing
  *----------------------------------*/
-html * + * {
+.site__header * + *,
+section:not(.project__tweak-settings) * + * {
   margin-top: 1.8rem;
 }
-html * + h1,
-html * + h2,
-html * + h3 {
+.site__header * + h1,
+.site__header * + h2,
+.site__header * + h3,
+section:not(.project__tweak-settings) * + h1,
+section:not(.project__tweak-settings) * + h2,
+section:not(.project__tweak-settings) * + h3 {
   margin-top: 3.6rem;
 }
-html * + section {
+.site__header * + section,
+section:not(.project__tweak-settings) * + section {
   margin-top: 9rem;
 }
 
@@ -796,6 +801,10 @@ html * + section {
   .container {
     padding: 0 5.4rem;
   }
+}
+
+section + .section--basic {
+  margin-top: 6rem;
 }
 
 /* Site Logo

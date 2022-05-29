@@ -18,8 +18,14 @@ pane.addInput(settings, 'gap', { min: 1, max: 100, step: 1 });
 pane.addInput(settings, 'crestMultiplier', { min: 0.01, max: 1, step: 0.01 });
 pane.addInput(settings, 'valleyMultiplier', { min: 0.01, max: 1, step: 0.01 });
 pane.addInput(settings, 'diameterMultiplier', { min: 0.05, max: 1, step: 0.05 });
+const saveButton = pane.addButton({ title: 'Save Image' });
+
 pane.on('change', function () {
     redraw();
+});
+
+saveButton.on('click', function () {
+    saveCanvas('generated-image', 'png');
 });
 
 

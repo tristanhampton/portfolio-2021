@@ -177,6 +177,16 @@ class Box {
   }
 }
 
+// /* Save
+//  * ----------------------------------------------- */
+// function keyTyped() {
+//   if (key === 's') {
+//     saveCanvas('generated-image', 'png');
+//   }
+// }
+
+/* Tweakpane
+ * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Settings', container: document.querySelector('.project__tweak-settings .container') })
 const cellSettings = pane.addFolder({ title: 'Cell Settings' });
 cellSettings.addInput(settings, 'cellsX', { min: 2, max: 12, step: 1 })
@@ -186,7 +196,12 @@ lineSettings.addInput(settings, 'lineGap', { min: 1, max: 30, step: 1 })
 lineSettings.addInput(settings, 'pixelsPerSegment', { min: 10, max: 100, step: 1 })
 lineSettings.addInput(settings, 'scale', { min: 1, max: 50, step: 1 })
 lineSettings.addInput(settings, 'frequency', { min: 0.0001, max: 0.01, step: 0.0001 })
+const saveButton = pane.addButton({ title: 'Save Image' });
 
 pane.on('change', function () {
   redraw();
+});
+
+saveButton.on('click', function () {
+  saveCanvas('generated-image', 'png');
 });

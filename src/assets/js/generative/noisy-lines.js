@@ -40,46 +40,11 @@ function pushPoint() {
 }
 
 
-// /* Tweakpane Things
-// * ----------------------------------------------- */
-// const pane = new Tweakpane.Pane()
-
-// pane.on('change', function () {
-//   redraw();
-// });
-
-
-
-/* Helper Functions
+/* Tweakpane Things
 * ----------------------------------------------- */
-function setCanvasWidth() {
-  const container = document.querySelector('#canvasContainer');
-  const width = container.offsetWidth;
-  const padding = getStyle(container, 'padding-left');
+const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
+const saveButton = pane.addButton({ title: 'Save Image' });
 
-  // I want a perfect square, so set height the same
-  settings.canvasWidth = width - padding - padding;
-  settings.canvasHeight = width - padding - padding;
-}
-
-function getStyle(oElm, strCssRule) {
-  var strValue = "";
-  if (document.defaultView && document.defaultView.getComputedStyle) {
-    strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
-  }
-  else if (oElm.currentStyle) {
-    strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1) {
-      return p1.toUpperCase();
-    });
-    strValue = oElm.currentStyle[strCssRule];
-  }
-
-  strValue = strValue.replace('px', '');
-  return strValue;
-}
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+saveButton.on('click', function () {
+  saveCanvas('generated-image', 'png');
+});

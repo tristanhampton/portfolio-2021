@@ -5,7 +5,9 @@ const settings = {
 
 function setup() {
 	noLoop();
-	setCanvasWidth();
+	settings.canvasWidth = getCanvasWidth();
+	settings.canvasHeight = getCanvasWidth();
+
 	const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
 	canvas.parent('canvasContainer');
 	canvas.mouseClicked(redraw);
@@ -17,39 +19,15 @@ function draw() {
 	strokeWeight(1)
 }
 
-function windowResized() {
-	// Do resizing things here
-}
-
-function setCanvasWidth() {
-	const container = document.querySelector('#canvasContainer');
-	const width = container.offsetWidth;
-	const padding = getStyle(container, 'padding-left');
-
-	// I want a perfect square, so set height the same
-	settings.canvasWidth = width - padding - padding;
-	settings.canvasHeight = width - padding - padding;
-}
-
-function getStyle(oElm, strCssRule) {
-	var strValue = "";
-	if (document.defaultView && document.defaultView.getComputedStyle) {
-		strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
-	}
-	else if (oElm.currentStyle) {
-		strCssRule = strCssRule.replace(/\-(\w)/g, function (strMatch, p1) {
-			return p1.toUpperCase();
-		});
-		strValue = oElm.currentStyle[strCssRule];
-	}
-
-	strValue = strValue.replace('px', '');
-	return strValue;
-}
 
 /* Tweakpane Things
- * ----------------------------------------------- */
-const pane = new Tweakpane.Pane()
+* ----------------------------------------------- */
+const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
+const saveButton = pane.addButton({ title: 'Save Image' });
+
+saveButton.on('click', function () {
+	saveCanvas('generated-image', 'png');
+});
 
 pane.on('change', function () {
 	redraw();

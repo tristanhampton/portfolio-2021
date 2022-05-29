@@ -39,13 +39,13 @@ function pushPoint() {
 }
 
 
-/* Tweakpane Things
-* ----------------------------------------------- */
-const pane = new Tweakpane.Pane()
+// /* Tweakpane Things
+// * ----------------------------------------------- */
+// const pane = new Tweakpane.Pane()
 
-pane.on('change', function () {
-  redraw();
-});
+// pane.on('change', function () {
+//   redraw();
+// });
 
 
 

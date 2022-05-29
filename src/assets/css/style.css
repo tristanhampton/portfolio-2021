@@ -545,12 +545,12 @@ h2,
 .h2 {
   font-family: "Noto Serif", serif;
   font-weight: 400;
-  font-size: 2.883rem;
+  font-size: 2.278rem;
 }
 @media (min-width: 781px) {
   h2,
 .h2 {
-    font-size: 5.493rem;
+    font-size: 2.813rem;
   }
 }
 
@@ -558,12 +558,12 @@ h3,
 .h3 {
   font-family: "Noto Serif", serif;
   font-weight: 400;
-  font-size: 2.278rem;
+  font-size: 2rem;
 }
 @media (min-width: 781px) {
   h3,
 .h3 {
-    font-size: 2.813rem;
+    font-size: 2.2rem;
   }
 }
 
@@ -671,26 +671,26 @@ html {
   box-sizing: border-box;
 }
 
-/* Spacing
+/* Basic Spacing
  *----------------------------------*/
-.site__header * + *,
-section:not(.project__tweak-settings) * + * {
+* + p,
+* + li {
   margin-top: 1.8rem;
 }
-.site__header * + h1,
-.site__header * + h2,
-.site__header * + h3,
-section:not(.project__tweak-settings) * + h1,
-section:not(.project__tweak-settings) * + h2,
-section:not(.project__tweak-settings) * + h3 {
+* + h1,
+* + h2,
+* + h3 {
   margin-top: 3.6rem;
 }
-.site__header * + section,
-section:not(.project__tweak-settings) * + section {
-  margin-top: 9rem;
+* + section {
+  margin-top: 7.2rem;
 }
 
-/* Canvas
+.projects__list {
+  padding-bottom: 4rem;
+}
+
+/* Navigation Canvas
  * ----------------------------------------------- */
 .site > canvas {
   transition: opacity 0.3s ease-out;
@@ -731,7 +731,7 @@ section:not(.project__tweak-settings) * + section {
   font-weight: 400;
   margin: 0;
   background-color: #212121;
-  color: #F9F9F9;
+  color: #f9f9f9;
   font-size: 1.6rem;
 }
 .site.lock {

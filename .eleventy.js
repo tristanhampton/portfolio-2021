@@ -1,6 +1,6 @@
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
-module.exports = function(config) {
+module.exports = function (config) {
     //--- Plugins
     config.addPlugin(eleventyNavigationPlugin);
 
@@ -22,6 +22,9 @@ module.exports = function(config) {
 
     //--- Adds images to _site
     config.addPassthroughCopy({ "src/assets/img": "img" });
+
+    //--- Adds favicons to _site
+    config.addPassthroughCopy({ "src/assets/favicons": "favicons" });
 
     //--- Adds fonts to _site
     config.addPassthroughCopy({ "src/assets/fonts": "fonts" });

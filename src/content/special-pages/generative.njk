@@ -23,7 +23,7 @@ permalink: "/generative/"
 			<h2>Projects</h2>
 
 			<ul>
-				{% for project in collections.generative %}
+				{% for project in collections.generative | reverse %}
 					{% if project.data.published %}
 						<li class="h3 generative-item"><a href="{{ project.url }}" class="gradient-hover" title="{{ project.data.title }}">{{ project.data.title }}</a></li>
 					{% endif %}

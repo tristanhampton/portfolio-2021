@@ -20,7 +20,6 @@ function setup() {
   const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
   canvas.parent('canvasContainer');
   canvas.mouseClicked(redraw);
-
 }
 
 function draw() {

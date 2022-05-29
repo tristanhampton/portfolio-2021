@@ -1,38 +1,40 @@
 ---
 tags:
-- generative 
-date: 2022-05-28
+- generative
+date: 2022-02-15
 layout: canvas
-title: Noisy Lines
-permalink: "generative/noisy-lines/"
+title: Circles and Paths
+permalink: "generative/circles-and-paths/"
 published: true
 eleventyNavigation:
-  key: Noisy Lines
-  parent: 'generative'
-  order: 1
+	key: Circles and Paths
+	parent: 'generative'
+	order: 1
 ---
 <main class="site__main main--projects">
 
 	<section class="intro">
 		<div class="container">
 			<h1>{{ title }}</h1>
-			<p>Click or tap on the canvas to leave an invisible point. Each of these points will randomly draw lines to each other.</p>
+			<p>To generate a new image, click or tap the image. Changing the image settings will also cause the image to update.</p>
     </div>
 	</section>
 
 	<section class="project__canvas section--basic">
 		<h2 class="sr-only">Project Canvas</h2>
-		<div class="container type--canvas" id="canvasContainer"></div>
+		<div class="container type--canvas" id="canvasContainer">
+		</div>
 	</section>
 
 	<section class="project__tweak-settings section--basic">
 		<h2 class="sr-only">Project Settings</h2>
-		<div class="container"></div>
+		<div class="container">
+		</div>
 	</section>
 
 </main>
 
 <script type="text/javascript" src="/js/plugins/p5.min.js"></script>
 <script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script src="/js/generative/noisy-lines.js"></script>
 <script src="/js/generative/p5-custom-library.js"></script>
+<script src="/js/generative/circles-and-paths.js"></script>

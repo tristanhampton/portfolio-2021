@@ -5,7 +5,6 @@ const settings = {
   cellGapRate: 0.05,
   lineGap: 3,
   cellsX: 3,
-  cellsY: 3,
   frequency: 0.003,
   scale: 20,
   pixelsPerSegment: 50,
@@ -34,10 +33,10 @@ function draw() {
 
   // width/height are determined by num of cells, subtracting gaps to allow for space
   const w = settings.canvasWidth / settings.cellsX - settings.gap - (settings.gap / settings.cellsX);
-  const h = settings.canvasHeight / settings.cellsY - settings.gap - (settings.gap / settings.cellsY);
+  const h = settings.canvasHeight / settings.cellsX - settings.gap - (settings.gap / settings.cellsX);
 
   for (let i = 0; i < settings.cellsX; i++) {
-    for (let j = 0; j < settings.cellsY; j++) {
+    for (let j = 0; j < settings.cellsX; j++) {
       x = settings.gap + (w + settings.gap) * i;
       y = settings.gap + (h + settings.gap) * j;
 
@@ -182,7 +181,6 @@ class Box {
 const pane = new Tweakpane.Pane({ title: 'Settings', container: document.querySelector('.project__tweak-settings .container') })
 const cellSettings = pane.addFolder({ title: 'Cell Settings' });
 cellSettings.addInput(settings, 'cellsX', { min: 2, max: 12, step: 1 })
-cellSettings.addInput(settings, 'cellsY', { min: 2, max: 12, step: 1 })
 cellSettings.addInput(settings, 'cellGapRate', { min: 0.00, max: 0.10, step: 0.005 })
 const lineSettings = pane.addFolder({ title: 'Line Settings' });
 lineSettings.addInput(settings, 'lineGap', { min: 1, max: 30, step: 1 })

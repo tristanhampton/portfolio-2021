@@ -11,6 +11,7 @@ function setup() {
   const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
   canvas.parent('canvasContainer');
   // canvas.mouseClicked(redraw);
+  canvas.mouseClicked(pushPoint);
 }
 
 function draw() {
@@ -33,7 +34,7 @@ function draw() {
   });
 }
 
-function mouseClicked() {
+function pushPoint() {
   points.push(createVector(mouseX, mouseY));
 }
 

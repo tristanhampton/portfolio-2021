@@ -27,14 +27,31 @@ p5.prototype.getCanvasWidth = function () {
  * @param {int} y1 The first Y coordinate.
  * @param {int} x2 The second X coordinate.
  * @param {int} y2 The second Y coordinate.
- * @param {int} intensity The rate at which noise is applied.
+ * @param {object} noiseSettings Optional. Handles all settings that will apply to noise.
  */
-p5.prototype.noisyLine = function (x1, y1, x2, y2, intensity) {
+p5.prototype.noisyLine = function (x1, y1, x2, y2, noiseSettings) {
   // adapted from https://stackoverflow.com/questions/69389189/noisy-line-between-two-specific-points-p5-js
-  const pixelsPerSegment = 10;
-  const noiseScale = 120;
-  const noiseFrequency = intensity ? intensity : 0.01;
-  const noiseSpeed = 0.1;
+  let pixelsPerSegment, noiseScale, noiseFrequency, noiseSpeed;
+  pixelsPerSegment = 10;
+  noiseScale = 120;
+  noiseFrequency = 0.01;
+  noiseSpeed = 0.1;
+
+  if (noiseSettings && noiseSettings.pixelsPerSegment) {
+    pixelsPerSegment = noiseSettings.pixelsPerSegment;
+  }
+
+  if (noiseSettings && noiseSettings.scale) {
+    noiseScale = noiseSettings.scale;
+  }
+
+  if (noiseSettings && noiseSettings.frequency) {
+    noiseFrequency = noiseSettings.frequency;
+  }
+
+  if (noiseSettings && noiseSettings.speed) {
+    noiseSpeed = noiseSettings.speed;
+  }
 
   let start = createVector(x1, y1);
   let end = createVector(x2, y2);
@@ -73,7 +90,7 @@ p5.prototype.noisyLine = function (x1, y1, x2, y2, intensity) {
       (noise(
         // The bigger the value of noiseFrequency, the more erretically
         // the offset will change from point to point.
-        i * pixelsPerSegment * noiseFrequency,
+        i * pixelsPerSegment * noiseFrequency * getRandomInt(-50, 50),
         // The bigger the value of noiseSpeed, the more quickly the curve
         // fluxuations will change over time.
         (millis() / 1000) * noiseSpeed

@@ -4,10 +4,11 @@ const settings = {
   gap: null,
   cellGapRate: 0.05,
   lineGap: 3,
-  curvesPerLine: 10,
   cellsX: 3,
   cellsY: 3,
-  lineNoise: 5,
+  frequency: 0.003,
+  scale: 20,
+  pixelsPerSegment: 50,
 }
 
 let boxes = [];
@@ -58,6 +59,11 @@ class Box {
     this.height = height;
     this.spacing = settings.lineGap;
     this.curvesPerLine = settings.curvesPerLine;
+    this.noiseSettigs = {
+      pixelsPerSegment: settings.pixelsPerSegment,
+      scale: settings.scale,
+      frequency: settings.frequency,
+    };
   }
 
   bounding() {
@@ -68,90 +74,65 @@ class Box {
     rect(this.x, this.y, this.width, this.height);
   }
 
-  noisyLine(x1, y1, x2, y2, points) {
-    noFill();
-    strokeWeight(1);
-    let distance = Math.hypot(x2 - x1, y2 - y1);
-    let steps = distance / points;
-
-    //--- Determine what direction the line is moving. Assume diagonal.
-    let diagonal = true;
-    let vertical = false;
-    let horizontal = false;
-    if (x1 == x2) {
-      diagonal = false;
-      vertical = true;
-    } else if (y1 == y2) {
-      diagonal = false;
-      horizontal = true;
-    }
-
-
-    // I need this to be able to handle lines in any direction
-    beginShape();
-    curveVertex(x1, y1);
-    curveVertex(x1, y1);
-    for (let i = 1; i < points; i++) {
-      let noiseAlteration = noise(i + getRandomInt(-5, 5)) * settings.lineNoise;
-
-      if (vertical)
-        curveVertex(x1 + noiseAlteration, y1 + steps * i);
-      else if (horizontal)
-        curveVertex(x1 + steps * i, y1 + noiseAlteration);
-      else if (diagonal) {
-
-        if (x1 < x2 && y1 < y2) {
-          // Top left to bottom right angle (\)
-          curveVertex(x1 + steps * i + noiseAlteration, y1 + steps * i + noiseAlteration);
-        }
-
-        if (x1 > x2 && y1 < y2 && x1 - steps * i > x2) {
-          // top right to bottom left angle (/)
-          curveVertex(x1 - steps * i + noiseAlteration, y1 + steps * i + noiseAlteration);
-        }
-      }
-    }
-    curveVertex(x2, y2);
-    curveVertex(x2, y2);
-    endShape();
-  }
-
   linesVertical() {
+    let x1, y1, x2, y2;
     let side = getRandomInt(0, 2);
     if (side == 0) return;
 
     // Two possible orientations, left and right
     if (side == 1) {
       for (let i = this.x; i < this.x + this.width / 2; i += this.spacing) {
-        this.noisyLine(i, this.y, i, this.y + this.height, this.curvesPerLine)
+        x1 = i;
+        y1 = this.y;
+        x2 = i;
+        y2 = this.y + this.height;
+
+        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
       }
     } else if (side == 2) {
       for (let i = this.x + this.width / 2; i < this.x + this.width; i += this.spacing) {
-        this.noisyLine(i, this.y, i, this.y + this.height, this.curvesPerLine)
+        x1 = i;
+        y1 = this.y;
+        x2 = i;
+        y2 = this.y + this.height;
+
+        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
       }
     }
+
+
   }
 
   linesHorizontal() {
+    let x1, y1, x2, y2;
     let side = getRandomInt(0, 2);
     if (side == 0) return;
 
     // Two possible orientations, top and bottom
     if (side == 1) {
       for (let i = this.y; i < this.y + this.height / 2; i += this.spacing) {
-        this.noisyLine(this.x, i, this.x + this.width, i, this.curvesPerLine);
+        x1 = this.x;
+        y1 = i;
+        x2 = this.x + this.width;
+        y2 = i;
+
+        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
       }
     } else if (side == 2) {
       for (let i = this.y + this.width / 2; i < this.y + this.height; i += this.spacing) {
-        this.noisyLine(this.x, i, this.x + this.width, i, this.curvesPerLine);
+        x1 = this.x;
+        y1 = i;
+        x2 = this.x + this.width;
+        y2 = i;
+
+        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
       }
     }
   }
 
   linesDiagonal() {
     // Four possible orientations, topleft, bottomleft, topright, bottomright
-    // let corner = getRandomInt(0,4);
-    let corner = getRandomInt(-1, 1);
+    let corner = getRandomInt(-1, 4);
     if (corner <= 0) return;
 
     for (let i = 0; i < this.width; i += this.spacing) {
@@ -179,7 +160,7 @@ class Box {
         y2 = this.y + this.height - i;
       }
 
-      this.noisyLine(x1, y1, x2, y2, this.curvesPerLine);
+      noisyLine(x1, y1, x2, y2, this.noiseSettigs);
     }
   }
 
@@ -205,8 +186,9 @@ cellSettings.addInput(settings, 'cellsY', { min: 2, max: 12, step: 1 })
 cellSettings.addInput(settings, 'cellGapRate', { min: 0.00, max: 0.10, step: 0.005 })
 const lineSettings = pane.addFolder({ title: 'Line Settings' });
 lineSettings.addInput(settings, 'lineGap', { min: 1, max: 30, step: 1 })
-lineSettings.addInput(settings, 'curvesPerLine', { min: 1, max: 50, step: 1 })
-lineSettings.addInput(settings, 'lineNoise', { min: 1, max: 60, step: 1 })
+lineSettings.addInput(settings, 'pixelsPerSegment', { min: 10, max: 100, step: 1 })
+lineSettings.addInput(settings, 'scale', { min: 1, max: 50, step: 1 })
+lineSettings.addInput(settings, 'frequency', { min: 0.0001, max: 0.01, step: 0.0001 })
 
 pane.on('change', function () {
   redraw();

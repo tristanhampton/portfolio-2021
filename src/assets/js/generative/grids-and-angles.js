@@ -97,8 +97,6 @@ class Box {
         noisyLine(x1, y1, x2, y2, this.noiseSettigs);
       }
     }
-
-
   }
 
   linesHorizontal() {

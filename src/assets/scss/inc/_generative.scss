@@ -1,0 +1,40 @@
+.generative-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.generative-item {
+  margin: 0;
+  flex: 1 1 calc(33.333% - 4rem);
+  aspect-ratio: 1 / 1;
+  min-width: 20rem;
+
+  a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-decoration: none;
+    align-items: flex-end;
+    justify-content: stretch;
+  }
+
+  h3 {
+    padding: $sp-1 $sp-2;
+    background-color: rgba($black, 0.5);
+    border-top-right-radius: 20px;
+    transition: 0.3s ease-out;
+  }
+
+  a:hover,
+  a:focus {
+    h3 {
+      padding-bottom: $sp-2;
+    }
+  }
+}

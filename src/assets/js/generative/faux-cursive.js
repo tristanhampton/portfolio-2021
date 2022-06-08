@@ -54,16 +54,6 @@ function draw() {
   });
 }
 
-// function createAlphabet() {
-//   for (let i = 0; i < 26; i++) {
-//     alphabet.push({
-//       numOfSegments: getRandomInt(1,4),
-//       startCoordinate: 
-//     });
-
-//   }
-// }
-
 class Line {
   constructor(x, y, w, h) {
     this.x = x;
@@ -83,7 +73,6 @@ class Line {
   }
 
   draw() {
-    // this.bounding();
 
     noFill();
     stroke('#000');
@@ -128,7 +117,6 @@ class Word {
   }
 
   draw() {
-    // this.bounding();
 
     let totalCharacterWidth = 0;
     let width = 0;
@@ -143,7 +131,7 @@ class Word {
 
     this.characters.forEach(character => {
       character.draw();
-    })
+    });
   }
 }
 

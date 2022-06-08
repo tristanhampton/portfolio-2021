@@ -3,13 +3,13 @@ const settings = {
   canvasHeight: null,
   canvasGapRate: 0.01,
   canvasGap: null,
-  lineHeightRate: 0.06,
+  lineHeightRate: 0.03,
   lineHeight: null,
-  lineGapRate: 0.03,
+  lineGapRate: 0.006,
   lineGap: null,
   lines: [],
-  maxCharacterWidth: 150,
-  characterGap: 5,
+  maxWordWidth: 150,
+  wordGap: 30,
   pixelsPerSegment: 5,
   frequency: 0.001,
   scale: 10,
@@ -71,7 +71,7 @@ class Line {
     this.width = w;
     this.height = h;
     this.characterWidth = settings.characterWidth;
-    this.characterGap = settings.characterGap;
+    this.wordGap = settings.wordGap;
     this.words = [];
   }
 
@@ -95,9 +95,9 @@ class Line {
       y = this.y;
 
       // ideal max width is 150px, if there is less space than that then the max width is the remaining empty space
-      let maxWidth = this.width + this.x - totalWordWidth > settings.maxCharacterWidth ? settings.maxCharacterWidth : this.width + this.x - totalWordWidth;
+      let maxWidth = this.width + this.x - totalWordWidth > settings.maxWordWidth ? settings.maxWordWidth : this.width + this.x - totalWordWidth;
       width = getRandomInt(30, maxWidth);
-      totalWordWidth += width + this.characterGap;
+      totalWordWidth += width + this.wordGap;
       height = this.height;
 
       // Random
@@ -128,7 +128,7 @@ class Word {
   }
 
   draw() {
-    this.bounding();
+    // this.bounding();
 
     let totalCharacterWidth = 0;
     let width = 0;
@@ -157,29 +157,42 @@ class Character {
   }
 
   draw() {
-    for (let i = 0; i < 1; i++) {
-      let lineStyle = getRandomInt(0, 1) == 0 ? 'line' : 'curve';
-      // if (i == 0) {
-      let x1 = this.x;
-      let y1 = this.y + (this.height / 2);
-      let x2 = getRandomInt(this.x, this.x + this.width);
-      let y2 = getRandomInt(this.y, this.y + this.height);
-      // }
+    let xstart, ystart, lineStyle;
+    let x1, x2, y1, y2;
+    let numSegments = getRandomInt(1, 4);
+    for (let i = 0; i < numSegments; i++) {
+      lineStyle = getRandomInt(0, 1) == 0 ? 'line' : 'curve';
+      if (i == 0) {
+        // first segment of a character
+        x1 = this.x;
+        y1 = this.y + (this.height / 2);
+        x2 = getRandomInt(this.x, this.x + this.width);
+        y2 = getRandomInt(this.y, this.y + this.height);
+        xstart = x2;
+        ystart = y2;
+      } else if (i == numSegments - 1) {
+        // last segment of a character, should end on the right center to flow with other characters
+        x1 = xstart;
+        y1 = ystart;
+        x2 = this.x + this.width;
+        y2 = this.y + (this.height / 2);
+      } else {
+        // every other segment of a character
+        x1 = xstart;
+        y1 = ystart;
+        x2 = getRandomInt(this.x, this.x + this.width);
+        y2 = getRandomInt(this.y, this.y + this.height);
+        xstart = x2;
+        ystart = y2;
+      }
 
       strokeWeight(1);
-      stroke('red');
+      stroke('#000');
 
       if (lineStyle == 'curve') {
-
-        beginShape();
-        curveVertex(x1, y1);
-        curveVertex(x1, y1);
-
-        curveVertex(x2, y2);
-        curveVertex(x2, y2);
-        endShape();
+        noisyLine(x1, y1, x2, y2, { pixelsPerSegment: 5, scale: 30, frequency: 0.0001 })
       } else if (lineStyle == 'line') {
-        line(x1, y1, x2, y2);
+        noisyLine(x1, y1, x2, y2, { pixelsPerSegment: 5, scale: 10, frequency: 0.001 });
       }
 
     }
@@ -191,15 +204,12 @@ class Character {
 * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
 const lineSettings = pane.addFolder({ title: 'Line Settings' });
-lineSettings.addInput(settings, 'canvasGapRate', { min: 0, max: 0.1, step: 0.001 });
-lineSettings.addInput(settings, 'lineHeightRate', { min: 0, max: 0.1, step: 0.001 });
-lineSettings.addInput(settings, 'lineGapRate', { min: 0, max: 0.3, step: 0.001 });
+lineSettings.addInput(settings, 'canvasGapRate', { min: 0, max: 0.1, step: 0.001, label: 'Margin' });
+lineSettings.addInput(settings, 'lineHeightRate', { min: 0, max: 0.1, step: 0.001, label: 'Line Height' });
+lineSettings.addInput(settings, 'lineGapRate', { min: 0, max: 0.3, step: 0.001, label: 'Line Gap' });
 const characterSettings = pane.addFolder({ title: 'Character Settings' });
-characterSettings.addInput(settings, 'maxCharacterWidth', { min: 10, max: 200, step: 1 });
-characterSettings.addInput(settings, 'characterGap', { min: 1, max: 30, step: 1 });
-characterSettings.addInput(settings, 'pixelsPerSegment', { min: 1, max: 30, step: 1 });
-characterSettings.addInput(settings, 'scale', { min: 1, max: 120, step: 1 });
-characterSettings.addInput(settings, 'frequency', { min: 0.0001, max: 0.1, step: 0.0001 });
+characterSettings.addInput(settings, 'maxWordWidth', { min: 10, max: 300, step: 1, label: 'Max Word Width' });
+characterSettings.addInput(settings, 'wordGap', { min: 15, max: 90, step: 1, label: 'Word Space' });
 
 const saveButton = pane.addButton({ title: 'Save Image' });
 

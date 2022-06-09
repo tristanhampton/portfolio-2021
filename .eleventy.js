@@ -8,7 +8,7 @@ module.exports = function (config) {
     // Additional files to watch for changes
     config.addWatchTarget("./eleventy/");
 
-    //--- Adds admin page from Forestry
+    //--- Adds admin page for Netlify
     config.addPassthroughCopy("admin");
 
     //--- Adds uploaded content to _site

@@ -16,7 +16,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<meta name="author" content="Tristan Hampton">
-	<meta name="description" content="Front End Web Developer from Edmonton, Alberta">
+	<meta name="description" content="Front End Web Developer from Edmonton, Alberta focusing on clean, accessible websites.">
+	<meta name="robots" content="follow,index">
+
+	{% if ogType %}
+		<meta name="og:type" content="{{ ogType }}">
+	{% endif %}
+
+	{% if ogTitle %}
+		<meta name="og:title" content="{{ ogTitle }}">
+		<meta name="twitter:title" content="{{ ogTitle }}">
+	{% endif %}
+
+	{% if ogDescription %}
+		<meta name="og:description" content="{{ ogDescription }}">
+		<meta name="twitter:description" content="{{ ogDescription }}">
+	{% endif %}
+
+	{% if ogImage %}
+		<meta name="og:image" content="{{ ogImage }}">
+		<meta name="twitter:description" content="{{ ogDescription }}">
+	{% endif %}
+
+	<meta name="og:url" content="https://tristanhampton.ca/{{ permalink }}">
 
 	<title>{{siteTitle if siteTitle else 'Tristan Hampton'}}{% if title %} - {{ title }}{% endif %}</title>
 

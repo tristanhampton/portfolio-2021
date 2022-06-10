@@ -5,9 +5,10 @@ const settings = {
   cellGapRate: 0.05,
   lineGap: 3,
   cellsX: 3,
-  frequency: 0.003,
-  scale: 20,
-  pixelsPerSegment: 50,
+  frequency: 1,
+  scale: 5,
+  segments: 4,
+  chaos: 1,
 }
 
 let boxes = [];
@@ -56,16 +57,9 @@ class Box {
     this.width = width;
     this.height = height;
     this.spacing = settings.lineGap;
-    this.curvesPerLine = settings.curvesPerLine;
-    this.noiseSettigs = {
-      pixelsPerSegment: settings.pixelsPerSegment,
-      scale: settings.scale,
-      frequency: settings.frequency,
-    };
   }
 
   bounding() {
-    // This is mostly for debugging
     noFill();
     stroke('#000');
     strokeWeight(1);
@@ -73,7 +67,7 @@ class Box {
   }
 
   linesVertical() {
-    let x1, y1, x2, y2;
+    let x1, y1, x2, y2, noise;
     let side = getRandomInt(0, 2);
     if (side == 0) return;
 
@@ -84,8 +78,14 @@ class Box {
         y1 = this.y;
         x2 = i;
         y2 = this.y + this.height;
+        noise = {
+          scale: getRandomInt(5, settings.scale),
+          segments: getRandomInt(2, settings.segments),
+          frequency: getRandomInt(5, settings.frequency),
+          chaos: settings.chaos,
+        }
 
-        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
+        noisyLine(x1, y1, x2, y2, noise);
       }
     } else if (side == 2) {
       for (let i = this.x + this.width / 2; i < this.x + this.width; i += this.spacing) {
@@ -93,14 +93,20 @@ class Box {
         y1 = this.y;
         x2 = i;
         y2 = this.y + this.height;
+        noise = {
+          scale: getRandomInt(5, settings.scale),
+          segments: getRandomInt(2, settings.segments),
+          frequency: getRandomInt(5, settings.frequency),
+          chaos: settings.chaos,
+        }
 
-        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
+        noisyLine(x1, y1, x2, y2, noise);
       }
     }
   }
 
   linesHorizontal() {
-    let x1, y1, x2, y2;
+    let x1, y1, x2, y2, noise;
     let side = getRandomInt(0, 2);
     if (side == 0) return;
 
@@ -111,8 +117,14 @@ class Box {
         y1 = i;
         x2 = this.x + this.width;
         y2 = i;
+        noise = {
+          scale: getRandomInt(5, settings.scale),
+          segments: getRandomInt(2, settings.segments),
+          frequency: getRandomInt(5, settings.frequency),
+          chaos: settings.chaos,
+        }
 
-        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
+        noisyLine(x1, y1, x2, y2, noise);
       }
     } else if (side == 2) {
       for (let i = this.y + this.width / 2; i < this.y + this.height; i += this.spacing) {
@@ -120,19 +132,25 @@ class Box {
         y1 = i;
         x2 = this.x + this.width;
         y2 = i;
+        noise = {
+          scale: getRandomInt(5, settings.scale),
+          segments: getRandomInt(2, settings.segments),
+          frequency: getRandomInt(5, settings.frequency),
+          chaos: settings.chaos,
+        }
 
-        noisyLine(x1, y1, x2, y2, this.noiseSettigs);
+        noisyLine(x1, y1, x2, y2, noise);
       }
     }
   }
 
   linesDiagonal() {
+    let x1, y1, x2, y2, noise;
     // Four possible orientations, topleft, bottomleft, topright, bottomright
     let corner = getRandomInt(-1, 4);
     if (corner <= 0) return;
 
     for (let i = 0; i < this.width; i += this.spacing) {
-      let x1, y1, x2, y2;
 
       if (corner == 1) {
         x1 = this.x + i;
@@ -156,13 +174,19 @@ class Box {
         y2 = this.y + this.height - i;
       }
 
-      noisyLine(x1, y1, x2, y2, this.noiseSettigs);
+      noise = {
+        scale: getRandomInt(5, settings.scale),
+        segments: getRandomInt(2, settings.segments),
+        frequency: getRandomInt(5, settings.frequency),
+        chaos: settings.chaos,
+      }
+
+      noisyLine(x1, y1, x2, y2, noise);
     }
   }
 
   draw() {
     strokeWeight(1);
-    // this.bounding();
 
     stroke('#db6d41');
     this.linesVertical();
@@ -175,14 +199,6 @@ class Box {
   }
 }
 
-// /* Save
-//  * ----------------------------------------------- */
-// function keyTyped() {
-//   if (key === 's') {
-//     saveCanvas('generated-image', 'png');
-//   }
-// }
-
 /* Tweakpane
  * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Settings', container: document.querySelector('.project__tweak-settings .container') })
@@ -191,9 +207,10 @@ cellSettings.addInput(settings, 'cellsX', { min: 2, max: 12, step: 1 })
 cellSettings.addInput(settings, 'cellGapRate', { min: 0.00, max: 0.10, step: 0.005 })
 const lineSettings = pane.addFolder({ title: 'Line Settings' });
 lineSettings.addInput(settings, 'lineGap', { min: 1, max: 30, step: 1 })
-lineSettings.addInput(settings, 'pixelsPerSegment', { min: 10, max: 100, step: 1 })
+lineSettings.addInput(settings, 'segments', { min: 1, max: 30, step: 1 })
 lineSettings.addInput(settings, 'scale', { min: 1, max: 50, step: 1 })
-lineSettings.addInput(settings, 'frequency', { min: 0.0001, max: 0.01, step: 0.0001 })
+lineSettings.addInput(settings, 'frequency', { min: 1, max: 10, step: 1 })
+lineSettings.addInput(settings, 'chaos', { min: 1, max: 10, step: 1 })
 const saveButton = pane.addButton({ title: 'Save Image' });
 
 pane.on('change', function () {

@@ -31,26 +31,40 @@ p5.prototype.getCanvasWidth = function () {
  */
 p5.prototype.noisyLine = function (x1, y1, x2, y2, noiseSettings) {
   // adapted from https://stackoverflow.com/questions/69389189/noisy-line-between-two-specific-points-p5-js
-  let pixelsPerSegment, noiseScale, noiseFrequency, noiseSpeed;
-  pixelsPerSegment = 10;
-  noiseScale = 120;
-  noiseFrequency = 0.01;
+  let segments, noiseScale, noiseFrequency, noiseSpeed, debug, chaos;
+
+  // defaults
+  noiseScale = 50;
+  noiseFrequency = 0.001;
   noiseSpeed = 0.1;
+  segments = 3;
+  debug = false;
+  chaos = false;
 
-  if (noiseSettings && noiseSettings.pixelsPerSegment) {
-    pixelsPerSegment = noiseSettings.pixelsPerSegment;
-  }
-
+  // If any settings are specified, change them
+  // They're all scaled so that setting numbers from 1-100 will have the desired effect
   if (noiseSettings && noiseSettings.scale) {
-    noiseScale = noiseSettings.scale;
+    noiseScale = noiseSettings.scale * 10;
   }
 
   if (noiseSettings && noiseSettings.frequency) {
-    noiseFrequency = noiseSettings.frequency;
+    noiseFrequency = noiseSettings.frequency / 1000;
   }
 
   if (noiseSettings && noiseSettings.speed) {
-    noiseSpeed = noiseSettings.speed;
+    noiseSpeed = noiseSettings.speed / 250;
+  }
+
+  if (noiseSettings && noiseSettings.segments) {
+    segments = noiseSettings.segments;
+  }
+
+  if (noiseSettings && noiseSettings.chaos) {
+    chaos = getRandomInt(settings.chaos * -1, settings.chaos);
+  }
+
+  if (noiseSettings && noiseSettings.debug) {
+    debug = noiseSettings.debug;
   }
 
   let start = createVector(x1, y1);
@@ -59,26 +73,31 @@ p5.prototype.noisyLine = function (x1, y1, x2, y2, noiseSettings) {
   noFill();
 
   let lineLength = start.dist(end);
-  // Determine the number of segments, and make sure there is at least one.
-  let segments = max(1, round(lineLength / pixelsPerSegment));
-  // Determine the number of points, which is the number of segments + 1
-  let points = 1 + segments;
+
+  // if linelength is too small, don't do more than 2 segments
+  if (lineLength < 30 && segments > 2) {
+    segments = 2;
+  }
+
+  // Determine how long one segment is
+  let segmentLength = lineLength / segments;
 
   // We need to know the angle of the line so that we can determine the x
   // and y position for each point along the line, and when we offset based
   // on noise we do so perpendicular to the line.
   let angle = atan2(end.y - start.y, end.x - start.x);
 
-  let xInterval = pixelsPerSegment * cos(angle);
-  let yInterval = pixelsPerSegment * sin(angle);
+  let xInterval = segmentLength * cos(angle);
+  let yInterval = segmentLength * sin(angle);
 
   beginShape();
+
   // Always start with the start point
   curveVertex(start.x, start.y);
   curveVertex(start.x, start.y);
 
   // for each point that is neither the start nor end point
-  for (let i = 1; i < points - 1; i++) {
+  for (let i = 1; i < segments; i++) {
     // determine the x and y positions along the straight line
     let x = start.x + xInterval * i;
     let y = start.y + yInterval * i;
@@ -90,11 +109,15 @@ p5.prototype.noisyLine = function (x1, y1, x2, y2, noiseSettings) {
       (noise(
         // The bigger the value of noiseFrequency, the more erretically
         // the offset will change from point to point.
-        i * pixelsPerSegment * noiseFrequency * getRandomInt(-50, 50),
+        i * segmentLength * noiseFrequency,
         // The bigger the value of noiseSpeed, the more quickly the curve
         // fluxuations will change over time.
         (millis() / 1000) * noiseSpeed
       ) - 0.5);
+
+    if (chaos) {
+      offset *= chaos;
+    }
 
     // Translate offset into x and y components based on angle - 90°
     // (or in this case, PI / 2 radians, which is equivalent)
@@ -102,10 +125,18 @@ p5.prototype.noisyLine = function (x1, y1, x2, y2, noiseSettings) {
     let yOffset = offset * sin(angle - PI / 2);
 
     curveVertex(x + xOffset, y + yOffset);
+
+    if (debug) {
+      circle(x + xOffset, y + yOffset, 20);
+    }
   }
 
   curveVertex(end.x, end.y);
   curveVertex(end.x, end.y);
+  if (debug) {
+    circle(start.x, start.y, 20);
+    circle(end.x, end.y, 20)
+  }
   endShape();
 }
 

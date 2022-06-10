@@ -10,8 +10,8 @@ const settings = {
   lines: [],
   maxWordWidth: 150,
   wordGap: 30,
-  pixelsPerSegment: 5,
-  frequency: 0.001,
+  segments: 4,
+  frequency: 1,
   scale: 10,
 };
 
@@ -178,9 +178,9 @@ class Character {
       stroke('#000');
 
       if (lineStyle == 'curve') {
-        noisyLine(x1, y1, x2, y2, { pixelsPerSegment: 5, scale: 30, frequency: 0.0001 })
+        noisyLine(x1, y1, x2, y2, { segments: 6, scale: 4, frequency: 0.1, chaos: 1 })
       } else if (lineStyle == 'line') {
-        noisyLine(x1, y1, x2, y2, { pixelsPerSegment: 5, scale: 10, frequency: 0.001 });
+        noisyLine(x1, y1, x2, y2, { segments: 1, scale: 1, frequency: 1, chaos: 1 });
       }
 
     }

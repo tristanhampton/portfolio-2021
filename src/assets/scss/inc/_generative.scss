@@ -12,6 +12,10 @@
   aspect-ratio: 1 / 1;
   min-width: 20rem;
 
+  @include min-bp(1020) {
+    max-width: calc(50% - 2rem);
+  }
+
   a {
     display: flex;
     width: 100%;

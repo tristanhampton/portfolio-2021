@@ -1336,6 +1336,11 @@ footer .attribution a {
   aspect-ratio: 1/1;
   min-width: 20rem;
 }
+@media (min-width: 1020px) {
+  .generative-item {
+    max-width: calc(50% - 2rem);
+  }
+}
 .generative-item a {
   display: flex;
   width: 100%;

@@ -1,0 +1,42 @@
+---
+tags:
+- generative 
+date: 2022-05-10
+layout: canvas
+title: Grids and Angles
+permalink: "generative/grids-and-angles/"
+published: true
+thumbnail: "grids-and-angles.png"
+eleventyNavigation:
+  key: Grids and Angles
+  parent: 'generative'
+  order: 1
+---
+<main class="site__main main--projects">
+
+	<section class="intro">
+		<div class="container">
+			<h1>{{ title }}</h1>
+			<p>To generate a new image, click or tap the image. Changing the image settings will also cause the image to update.</p>
+			<p>This piece was inspired by <a href="https://www.instagram.com/p/CcsIjvmMoqR/" target="_blank">this Instagram post</a>, created by user <a href="https://www.instagram.com/aleksandrajovanic/">aleksandrajovanic</a></p>
+    </div>
+	</section>
+
+	<section class="project__canvas section--basic">
+		<h2 class="sr-only">Project Canvas</h2>
+		<div class="container type--canvas" id="canvasContainer">
+		</div>
+	</section>
+
+	<section class="project__tweak-settings section--basic">
+		<h2 class="sr-only">Project Settings</h2>
+		<div class="container">
+		</div>
+	</section>
+
+</main>
+
+<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
+<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
+<script src="/js/generative/p5-custom-library.js"></script>
+<script src="../js/grids-and-angles.js"></script>

@@ -20,6 +20,10 @@ module.exports = function (config) {
     //--- Adds JS to _site
     config.addPassthroughCopy({ "src/assets/js": "js" });
 
+    //--- Add Generative JS and IMG files
+    config.addPassthroughCopy({ "src/content/generative/*/*.js": 'generative/js' });
+    config.addPassthroughCopy({ "src/content/generative/*/*.png": 'generative/img' });
+
     //--- Adds images to _site
     config.addPassthroughCopy({ "src/assets/img": "img" });
 

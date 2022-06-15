@@ -8,8 +8,8 @@ title: Parkland School Division
 short: Parkland SD
 redirect: true
 site: "https://www.psd.ca/"
-img_desktop: "/img/screenshots/parkland-desktop.png"
-img_mobile: "/img/screenshots/parkland-mobile.png"
-img_small: "/img/screenshots/parkland-small.png"
+img_desktop: "parkland-desktop.png"
+img_mobile: "parkland-mobile.png"
+img_small: "parkland-small.png"
 permalink: "projects/parkland/"
 ---

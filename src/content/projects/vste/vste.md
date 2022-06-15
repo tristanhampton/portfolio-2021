@@ -7,9 +7,9 @@ layout: single
 title: Virginia Society for Technology in Education
 short: VSTE
 redirect: true
-img_desktop: "/img/screenshots/vste-desktop.png"
-img_mobile: "/img/screenshots/vste-mobile.png"
-site: "https://www.virtualvste.org/"
-img_small: "/img/screenshots/vste-small.png"
+img_desktop: "vste-desktop.png"
+img_mobile: "vste-mobile.png"
+img_small: "vste-small.png"
 permalink: "projects/vste/"
+site: "https://www.virtualvste.org/"
 ---

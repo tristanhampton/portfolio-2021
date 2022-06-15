@@ -21,7 +21,7 @@ permalink: "/projects/"
 			<h2>Projects with Box Clever</h2>
 
 			{% for project in collections.boxclever %}
-				<article class="project-item" style="background-image: url(../{{ project.data.img_small }})">
+				<article class="project-item" style="background-image: url(img/{{ project.data.img_small }})">
 					<a href="{{ project.data.site if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
 						<h3>{{ project.data.short }}</h3>
 					</a>

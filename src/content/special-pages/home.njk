@@ -21,7 +21,7 @@ permalink: "/"
 			<p>I've had the wonderful opportunity to work at <a href="https://boxclever.ca" target="_blank">Box Clever</a> and work on many exciting projects. Below are some of my favourites, and if you'd like to see more you can <a href="/projects">check out my project archive.</a></p>
 
 			{% for project in collections.project %}
-				{% if loop.index0 < 5 %}
+				{% if loop.index0 < 6 %}
 					<article class="project-item" style="background-image: url(projects/img/{{ project.data.img_small }})">
 						<a href="{{ project.data.site if project.data.redirect else project.url }}" title="{{ project.data.title }}" target="{{ '_blank' if project.data.redirect else '' }}">
 							<h3>{{ project.data.short }}</h3>

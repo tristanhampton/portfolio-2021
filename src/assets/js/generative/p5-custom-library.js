@@ -177,3 +177,26 @@ p5.prototype.getStyle = function (oElm, strCssRule) {
   strValue = strValue.replace('px', '');
   return strValue;
 }
+
+
+p5.prototype.getPointsOnEllipse = function (xCenter, yCenter, points, radius) {
+  let angle = 0;
+  let coordinates = []
+
+  step = TWO_PI / points; //in radians equivalent of 360/points in degrees
+
+  for (let i = 0; i < points; i++) {
+    // get x and y coordinates
+    // Adding center coordinates simulates adding a center to the "ellipse"
+    x = radius * sin(angle) + xCenter;
+    y = radius * cos(angle) + yCenter;
+
+    // save each coordinate as an object to reference later
+    coordinates.push(createVector(x, y));
+
+    // increase angle for next loop
+    angle = angle + step;
+  }
+
+  return coordinates;
+}

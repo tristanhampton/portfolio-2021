@@ -6,7 +6,8 @@ const settings = {
 	numPoints: 17,
 	numInnerPoints: 4,
 	circleRadius: 460,
-	innerCircleRadius: 140,
+	innerCircleWidth: 140,
+	innerCircleHeight: 140,
 	coordinates: [],
 	secondaryCoordinates: [],
 };
@@ -50,8 +51,7 @@ function draw() {
 
 	settings.secondaryCoordinates.forEach(circle => {
 		circle.forEach(point => {
-			ellipse(point.x, point.y, settings.innerCircleRadius);
-
+			ellipse(point.x, point.y, settings.innerCircleWidth, settings.innerCircleHeight);
 		});
 	});
 }
@@ -65,7 +65,8 @@ const circleSettings = pane.addFolder({ title: 'Circle Settings' });
 circleSettings.addInput(settings, 'numPoints', { min: 2, max: 48, step: 1, label: 'Number of Circles' });
 circleSettings.addInput(settings, 'circleRadius', { min: 100, max: 800, step: 1, label: 'Circle Radius' });
 circleSettings.addInput(settings, 'numInnerPoints', { min: 2, max: 8, step: 1, label: 'Number of Inner Circles' });
-circleSettings.addInput(settings, 'innerCircleRadius', { min: 5, max: 400, step: 1, label: 'Inner Circle Radius' })
+circleSettings.addInput(settings, 'innerCircleWidth', { min: 5, max: 400, step: 1, label: 'Inner Circle Width' });
+circleSettings.addInput(settings, 'innerCircleHeight', { min: 5, max: 400, step: 1, label: 'Inner Circle Height' });
 const saveButton = pane.addButton({ title: 'Save Image' });
 
 saveButton.on('click', function () {

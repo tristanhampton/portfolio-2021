@@ -1,11 +1,11 @@
 const settings = {
   canvasWidth: null,
   canvasHeight: null,
-  canvasGapRate: 0.01,
+  canvasGapRate: 0.02,
   canvasGap: null,
-  lineHeightRate: 0.03,
+  lineHeightRate: 0.04,
   lineHeight: null,
-  lineGapRate: 0.006,
+  lineGapRate: 0.03,
   lineGap: null,
   lines: [],
   maxWordWidth: 150,
@@ -73,7 +73,6 @@ class Line {
   }
 
   draw() {
-
     noFill();
     stroke('#000');
     let totalWordWidth = 0;
@@ -85,7 +84,12 @@ class Line {
 
       // ideal max width is 150px, if there is less space than that then the max width is the remaining empty space
       let maxWidth = this.width + this.x - totalWordWidth > settings.maxWordWidth ? settings.maxWordWidth : this.width + this.x - totalWordWidth;
-      width = getRandomInt(30, maxWidth);
+
+      if (getRandomInt(0, 6) == 0) {
+        width = 20;
+      } else {
+        width = getRandomInt(30, maxWidth);
+      }
       totalWordWidth += width + this.wordGap;
       height = this.height;
 
@@ -117,11 +121,11 @@ class Word {
   }
 
   draw() {
-
     let totalCharacterWidth = 0;
     let width = 0;
     do {
       width = getRandomInt(5, 10);
+
       totalCharacterWidth += width;
 
       if (totalCharacterWidth < this.width) {

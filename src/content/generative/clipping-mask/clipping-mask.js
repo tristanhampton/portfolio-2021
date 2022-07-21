@@ -1,6 +1,8 @@
 const settings = {
 	canvasWidth: null,
 	canvasHeight: null,
+	num: 20,
+	recs: [],
 };
 
 function setup() {
@@ -17,20 +19,38 @@ function draw() {
 	noStroke();
 	background('#f5f1e6');
 	strokeWeight(1)
-
+	settings.recs = [];
+	
 	let x,y,w,h;
 	let radius, angle,rx,ry;
 
-	x = settings.canvasWidth * 0.5;
-	y = settings.canvasHeight * 0.5;
-	w = settings.canvasWidth * 0.6;
-	h = settings.canvasHeight * 0.1;
+	// center context
+	translate(settings.canvasWidth / 2, settings.canvasHeight / 2)
 
-	translate(x,y);
-	stroke('blue');
-	noFill();
 
-	drawSkewedRect({degrees:23});
+	for(i=0; i < settings.num; i++) {
+		x = getRandomInt(0, settings.canvasWidth) - settings.canvasWidth/2;
+		y = getRandomInt(0, settings.canvasHeight) - settings.canvasHeight/2;
+		w = getRandomInt(200,600);
+		h = getRandomInt(40,200);
+	
+		settings.recs.push({x,y,w,h});
+	}
+
+	angle = -30;
+	
+	
+	settings.recs.forEach(rect => {
+		const {x,y,w,h} = rect;
+		stroke('blue');
+		strokeWeight(1);
+		noFill();
+
+		push();
+		translate(x,y);
+		drawSkewedRect({w,h,angle});
+		pop();
+	});
 	
 }
 

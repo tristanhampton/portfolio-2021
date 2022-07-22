@@ -2,7 +2,10 @@ const settings = {
 	canvasWidth: null,
 	canvasHeight: null,
 	num: 20,
-	recs: [],
+	angle: -30,
+	rects: [],
+	rectColors: [],
+	numColors: 2,
 };
 
 function setup() {
@@ -13,43 +16,53 @@ function setup() {
 	const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
 	canvas.parent('canvasContainer');
 	canvas.mouseClicked(redraw);
+
 }
 
 function draw() {
 	noStroke();
 	background('#f5f1e6');
 	strokeWeight(1)
-	settings.recs = [];
-	
-	let x,y,w,h;
-	let radius, angle,rx,ry;
+	settings.rects = [];
+	settings.rectColors = [];
 
+	let x,y,w,h;
+	let strokeColor, fillColor;
+	
 	// center context
 	translate(settings.canvasWidth / 2, settings.canvasHeight / 2)
-
+	
+	// Set colours that will be used
+	// Recommended to use Riso colours, but I didn't add it
+	for(i=0; i < settings.numColors; i++) {
+		settings.rectColors.push(`rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`)
+	}
 
 	for(i=0; i < settings.num; i++) {
 		x = getRandomInt(0, settings.canvasWidth) - settings.canvasWidth/2;
 		y = getRandomInt(0, settings.canvasHeight) - settings.canvasHeight/2;
-		w = getRandomInt(200,600);
-		h = getRandomInt(40,200);
-	
-		settings.recs.push({x,y,w,h});
+		w = getRandomInt(200,1200);
+		h = getRandomInt(40,600);
+
+		settings.rects.push({x,y,w,h});
 	}
 
-	angle = -30;
-	
-	
-	settings.recs.forEach(rect => {
+	settings.rects.forEach(rect => {
+		strokeColor = settings.rectColors[getRandomInt(0, settings.numColors - 1)];
+		fillColor = settings.rectColors[getRandomInt(0, settings.numColors - 1)];
+		angle = settings.angle;
+		
+		blendMode(getRandomInt(0, 1) < 1 ? OVERLAY : BURN);
 		const {x,y,w,h} = rect;
-		stroke('blue');
-		strokeWeight(1);
-		noFill();
+		stroke(strokeColor);
+		strokeWeight(6);
+		fill(fillColor);
 
 		push();
 		translate(x,y);
-		drawSkewedRect({w,h,angle});
+		drawSkewedRect({w,h,angle, strokeColor, fillColor});
 		pop();
+		blendMode(BLEND);
 	});
 	
 }

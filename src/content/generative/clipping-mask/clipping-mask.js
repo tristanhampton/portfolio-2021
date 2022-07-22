@@ -60,7 +60,7 @@ function draw() {
 
 		push();
 		translate(x,y);
-		drawSkewedRect({w,h,angle, strokeColor, fillColor});
+		drawSkewedRect(w,h,angle);
 		pop();
 		blendMode(BLEND);
 	});
@@ -69,7 +69,7 @@ function draw() {
 
 /* Functions
  * ----------------------------------------------- */
-const drawSkewedRect = ({w = 600,h = 200,degrees = -45}) => {
+const drawSkewedRect = (w = 600,h = 200,degrees = -45) => {
 	const angle = radians(degrees);
 	const rx = Math.cos(angle) * w;
 	const ry = Math.sin(angle) * w;
@@ -91,6 +91,8 @@ const drawSkewedRect = ({w = 600,h = 200,degrees = -45}) => {
 * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
 const saveButton = pane.addButton({ title: 'Save Image' });
+const lineSettings = pane.addFolder({ title: 'Line Settings' });
+lineSettings.addInput(settings, 'angle', { min: -360, max: 360, step: 1, label: 'Angle' });
 
 saveButton.on('click', function () {
 	saveCanvas('generated-image', 'png');

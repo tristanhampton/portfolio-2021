@@ -18,6 +18,7 @@ function setup() {
 	settings.canvasWidth = getCanvasWidth();
 	settings.canvasHeight = getCanvasWidth();
 	
+	// Create and place the canvas
 	const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
 	canvas.parent('canvasContainer');
 	canvas.mouseClicked(redraw);
@@ -98,8 +99,11 @@ const drawSkewedRect = (w = 600,h = 200,degrees = -45) => {
 	const ry = Math.sin(angle) * w;
 
 	push();
+
+	// set the center of the shape to be the canvas transformed position
 	translate(rx * -0.5, (ry + h) * -0.5);
 
+	// Draw the shape
 	beginShape();
 	vertex(0, 0);
 	vertex(rx, ry);

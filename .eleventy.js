@@ -23,6 +23,7 @@ module.exports = function (config) {
     //--- Add Generative JS and IMG files
     config.addPassthroughCopy({ "src/content/generative/*/*.js": 'generative/js' });
     config.addPassthroughCopy({ "src/content/generative/*/*.png": 'generative/img' });
+    config.addPassthroughCopy({ "src/content/generative/*/*.json": 'generative/js' });
 
     //--- Add Project images
     config.addPassthroughCopy({ "src/content/projects/*/*.png": 'projects/img' });

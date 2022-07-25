@@ -1,14 +1,15 @@
 const settings = {
-	canvasWidth: null,
-	canvasHeight: null,
+	width: null,
+	height: null,
 };
 
 function setup() {
 	noLoop();
-	settings.canvasWidth = getCanvasWidth();
-	settings.canvasHeight = getCanvasWidth();
+	settings.width = getCanvasWidth();
+	settings.height = getCanvasWidth();
 
-	const canvas = createCanvas(settings.canvasWidth, settings.canvasHeight);
+	// Create and place the canvas
+	const canvas = createCanvas(settings.width, settings.height);
 	canvas.parent('canvasContainer');
 	canvas.mouseClicked(redraw);
 }
@@ -16,13 +17,15 @@ function setup() {
 function draw() {
 	noStroke();
 	background('#f5f1e6');
-	strokeWeight(1)
+	strokeWeight(1);
 }
 
 
 /* Tweakpane Things
 * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
+// const folder = pane.addFolder({ title: 'Folder' });
+// folder.addInput(settings, 'variable', { min: 0, max: 100, step: 1, label: 'Variable' });
 const saveButton = pane.addButton({ title: 'Save Image' });
 
 saveButton.on('click', function () {

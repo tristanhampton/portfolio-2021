@@ -1,4 +1,5 @@
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
+const os = require('os')
 
 module.exports = function (config) {
     //--- Plugins

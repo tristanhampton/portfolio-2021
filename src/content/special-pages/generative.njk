@@ -33,8 +33,27 @@ permalink: "/generative/"
 					{% endif %}
 				{% endfor %}
 			</ul>
-
 		</div>
 	</section>
+	{{eleventy| dump}}
 
+	{% if eleventy.env.source == 'cli' %}
+	<section class="list">
+		<div class="container">
+			<h2>Studies</h2>
+
+			<ul class="generative-list">
+				{% for project in collections.generative | reverse %}
+					{% if 'study' in project.data.tags %}
+						<li class="generative-item">
+							<a href="{{ project.url }}" title="{{ project.data.title }}" style="background-image: url(img/{{ project.data.thumbnail }})">
+								<h3>{{ project.data.title }}</h3>
+							</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+	{% endif %}
 </main>

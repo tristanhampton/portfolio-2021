@@ -12,7 +12,7 @@
   "author": "Tristan Hampton",
   "license": "ISC",
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1",
+    "@11ty/eleventy": "^1.0.1",
     "@11ty/eleventy-navigation": "^0.1.6",
     "sass": "^1.32.8"
   }

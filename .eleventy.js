@@ -1,5 +1,5 @@
 const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
-const os = require('os')
+const os = require('os');
 
 module.exports = function (config) {
     //--- Plugins
@@ -37,6 +37,18 @@ module.exports = function (config) {
 
     //--- Adds fonts to _site
     config.addPassthroughCopy({ "src/assets/fonts": "fonts" });
+
+    //--- Determine if local or live
+    config.addGlobalData('local', function() {
+        const hostname = os.hostname();
+        console.log(hostname);
+
+        if(hostname.includes('local')) {
+            return true;
+        } else {
+            return false;
+        }
+    });
 
     return {
         pathPrefix: "/", // useful for GitHub pages

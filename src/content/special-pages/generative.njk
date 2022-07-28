@@ -35,9 +35,8 @@ permalink: "/generative/"
 			</ul>
 		</div>
 	</section>
-	{{eleventy| dump}}
 
-	{% if eleventy.env.source == 'cli' %}
+	{% if local %}
 	<section class="list">
 		<div class="container">
 			<h2>Studies</h2>

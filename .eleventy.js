@@ -41,7 +41,6 @@ module.exports = function (config) {
     //--- Determine if local or live
     config.addGlobalData('local', function() {
         const hostname = os.hostname();
-        console.log(hostname);
 
         if(hostname.includes('local')) {
             return true;

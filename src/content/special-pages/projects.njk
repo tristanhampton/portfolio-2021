@@ -22,7 +22,7 @@ permalink: "/projects/"
 
 			{% for project in collections.boxclever %}
 				<article class="project-item" style="background-image: url(img/{{ project.data.img_small }})">
-					<a href="{{ project.data.site if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
+					<a href="{{ project.data.website_url if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
 						<h3>{{ project.data.short }}</h3>
 					</a>
 				</article>
@@ -36,7 +36,7 @@ permalink: "/projects/"
 
 			{% for project in collections.yellowpencil %}
 				<article class="project-item" style="background-image: url(../{{ project.data.img_small }})">
-					<a href="{{ project.data.site if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
+					<a href="{{ project.data.website_url if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
 						<h3>{{ project.data.short }}</h3>
 					</a>
 				</article>
@@ -50,7 +50,7 @@ permalink: "/projects/"
 
 			{% for project in collections.personal %}
 				<article class="project-item" style="background-image: url(img/{{ project.data.img_small }})">
-					<a href="{{ project.data.site if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
+					<a href="{{ project.data.website_url if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
 						<h3>{{ project.data.short }}</h3>
 					</a>
 				</article>

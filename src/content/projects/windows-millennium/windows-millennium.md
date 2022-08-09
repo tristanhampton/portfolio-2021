@@ -11,5 +11,5 @@ redirect: true
 # img_mobile: "vste-mobile.png"
 img_small: "millennium-small.png"
 permalink: "projects/windows-millennium/"
-site: "https://millennium.tristanhampton.ca/"
+website_url: "https://millennium.tristanhampton.ca/"
 ---

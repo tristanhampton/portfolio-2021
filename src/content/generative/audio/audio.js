@@ -30,7 +30,7 @@ function draw() {
 		// Audio data is often in negatives becuase they're in decibal values
 		const bin = bins[i];
 		const mapped = mapRange(audioData[bin], analyserNode.minDecibels, analyserNode.maxDecibels, 0, 1, true)
-		const radius = mapped * settings.width/1.5;
+		const radius = mapped * settings.width;
 	
 		push();
 		noFill();
@@ -71,8 +71,8 @@ function createAudio() {
 	// Create Analyser Node to read data from audio and work with it
 	analyserNode = audioContext.createAnalyser();
 
-	// Change fft (Fast Fourier Transform) from default. Should be a power of 2.
-	analyserNode.fftSize = 512;
+	// Change fft (Fast Fourier Transform) from default. Should be a power of 2 from 0 to 32768.
+	analyserNode.fftSize = 32768;
 
 	// Change smoothing constant for smoother effects (default is 0.8)
 	analyserNode.smoothingTimeConstant = 0.9;

@@ -21,10 +21,11 @@ module.exports = function (config) {
     //--- Adds JS to _site
     config.addPassthroughCopy({ "src/assets/js": "js" });
 
-    //--- Add Generative JS and IMG files
+    //--- Add Generative JS, IMG, JSON, and MP3 files
     config.addPassthroughCopy({ "src/content/generative/*/*.js": 'generative/js' });
     config.addPassthroughCopy({ "src/content/generative/*/*.png": 'generative/img' });
     config.addPassthroughCopy({ "src/content/generative/*/*.json": 'generative/js' });
+    config.addPassthroughCopy({ "src/content/generative/*/*.mp3": 'generative/mp3' });
 
     //--- Add Project images
     config.addPassthroughCopy({ "src/content/projects/*/*.png": 'projects/img' });

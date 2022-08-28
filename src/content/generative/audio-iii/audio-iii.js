@@ -48,7 +48,7 @@ function draw() {
 	}
 
 	push();
-	translate(settings.width/6, settings.height/6);
+	translate(settings.width/2, settings.height/2);
 	
 	let cradius = settings.radius;
 	
@@ -76,7 +76,7 @@ function draw() {
 
 			// Draw the arc! 
 			strokeWeight(lineWidths[i]);
-			arc(0, 0, cradius + lineWidth/2, cradius + lineWidth/2, 0, phi)
+			arc(0, 0, cradius, cradius, 0, phi)
 		}
 
 		// increase the radius so that they don't overlap

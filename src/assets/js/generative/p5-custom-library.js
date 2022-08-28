@@ -708,5 +708,39 @@ p5.prototype.risoColors = function(numColors) {
   } else {
     return allColors;
   }
+}
 
+/* Easing
+ * ----------------------------------------------- */
+// Source: https://github.com/mattdesl/eases
+
+p5.prototype.expoOut = function(t) {
+  return t === 1.0 ? t : 1.0 - Math.pow(2.0, -10.0 * t);
+}
+
+p5.prototype.expoIn = function (t) {
+  return t === 0.0 ? t : Math.pow(2.0, 10.0 * (t - 1.0));
+}
+
+p5.prototype.expoInOut = function (t) {
+  return (t === 0.0 || t === 1.0)
+    ? t
+    : t < 0.5
+      ? +0.5 * Math.pow(2.0, (20.0 * t) - 10.0)
+      : -0.5 * Math.pow(2.0, 10.0 - (t * 20.0)) + 1.0
+}
+
+p5.prototype.quadIn = function (t) {
+  return t * t;
+}
+
+p5.prototype.quadOut = function (t) {
+  return -t * (t - 2.0)
+}
+
+p5.prototype.quadInOut = function (t) {
+  t /= 0.5
+  if (t < 1) return 0.5 * t * t
+  t--
+  return -0.5 * (t * (t - 2) - 1)
 }

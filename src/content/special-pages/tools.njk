@@ -1,0 +1,33 @@
+---
+layout: default
+siteTitle: "Tristan Hampton"
+title: "Tools"
+eleventyNavigation:
+  key: Tools
+  parent: ''
+  order: 2
+permalink: "/tools/"
+---
+
+<main class="site__main main--projects">
+
+	<section class="intro">
+		<div class="container">
+			<h1>{{title}}</h1>
+		</div>
+	</section>
+
+	<section class="list">
+		<div class="container">
+			<h2>Projects</h2>
+
+			<ul class="generative-list">
+				{% for tool in collections.tool | reverse %}
+					{% if tool.data.published %}
+            <li><h3><a href="{{ tool.url }}">{{ tool.data.title }}</a></h3></li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+</main>

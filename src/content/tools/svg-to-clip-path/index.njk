@@ -1,0 +1,44 @@
+---
+tags:
+- tool 
+date: 2022-08-25
+layout: default
+title: SVG to CSS Polygon
+permalink: "tools/svg-to-polygon/"
+published: true
+eleventyNavigation:
+  key: SVG to CSS Polygon
+  parent: 'tools'
+  order: 1
+---
+<main class="site__main main--projects">
+
+	<section class="intro">
+		<div class="container">
+			<h1>{{ title }}</h1>
+      <p>Tool For converting SVG paths into CSS Polygon shapes. Upload a file below</p>
+    </div>
+	</section>
+
+	<section class="project__canvas section--basic">
+    <div class="container">
+      <form action="">
+        <label for="numberOfPoints">Number of Points</label>
+        <input id="numberOfPoints" type="number" min="0" max="300">
+        <label for="svgFile">Upload SVG</label>
+        <input id="svgFile" type="file" accept=".svg">
+      </form>
+    </div>
+	</section>
+
+  <section class="output">
+    <div class="container">
+      <h2>CSS Output</h2>
+      <p class="code"></p>
+      <img src="" alt="">
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/clip-path.js"></script>

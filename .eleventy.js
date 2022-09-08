@@ -27,6 +27,9 @@ module.exports = function (config) {
     config.addPassthroughCopy({ "src/content/generative/*/*.json": 'generative/js' });
     config.addPassthroughCopy({ "src/content/generative/*/*.mp3": 'generative/mp3' });
 
+    //--- Add Tools JS files
+    config.addPassthroughCopy({ "src/content/tools/*/*.js": 'tools/js' });
+
     //--- Add Project images
     config.addPassthroughCopy({ "src/content/projects/*/*.png": 'projects/img' });
 

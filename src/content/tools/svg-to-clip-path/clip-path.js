@@ -12,17 +12,22 @@
 
 
 let files = document.querySelector('#svgFile');
-let paths;
+let form = document.querySelector('form')
 
-files.addEventListener('change', async function(e) {
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
   const paths = await getSVGPaths(files.files);
+  const steps = document.querySelector('#numberOfPoints').value ? document.querySelector('#numberOfPoints').value : 50
 
   // current problem: convertSVGPathToPoints returns numbers in percentages.
-  const points = convertSvgPathToPoints(paths, 50);
+  const points = convertSvgPathToPoints(paths, steps);
 
   const cssPolygonValue = generateClipPath(points)
 
+  // const aspectRatio = generateAspectRatio(points);
+
   document.querySelector('.output .code').innerHTML = cssPolygonValue
+  // document.querySelector('.output .aspect-ratio').innerHTML = aspectRatio
 
   // TODO: Add uploaded element to display on DOM
   // TODO: Nicely output polygon code
@@ -57,7 +62,6 @@ function convertSvgPathToPoints(paths, steps) {
   const path = paths[0];
   const len = path.getTotalLength();
   const points = [];
-  const cleanPoints = [];
 
   for (var i = 0; i < steps; i++) {
     var pt = path.getPointAtLength(i * len / (steps - 1));
@@ -66,7 +70,6 @@ function convertSvgPathToPoints(paths, steps) {
 
   return points;
 }
-
 
 
 function getScaledValue(value, sourceRangeMin, sourceRangeMax, targetRangeMin, targetRangeMax) {
@@ -109,4 +112,25 @@ function generateClipPath(coordinates) {
   clipPath = `clip-path: polygon(${clipPath});`;
 
   return clipPath;
+}
+
+function generateAspectRatio(coordinates) {
+  const rawNumbersX = [], rawNumbersY = [];
+  let largestX, largestY;
+
+  coordinates.forEach(array => {
+    let x = Number(array[0].replace('%', ''));
+    let y = Number(array[1].replace('%', ''));
+
+    
+    rawNumbersX.push(x);
+    rawNumbersY.push(y);
+  });
+  
+  largestX = Math.max.apply(0, rawNumbersX);
+  largestY = Math.max.apply(0, rawNumbersY);
+
+  let aspectRatio = `aspect-ratio: ${largestX} / ${largestY}`
+
+  return aspectRatio
 }

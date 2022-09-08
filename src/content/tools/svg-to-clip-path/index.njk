@@ -16,7 +16,8 @@ eleventyNavigation:
 	<section class="intro">
 		<div class="container">
 			<h1>{{ title }}</h1>
-      <p>Tool For converting SVG paths into CSS Polygon shapes. Upload a file below</p>
+      <p>Tool For converting SVG paths into CSS Polygon shapes. Right now, it can only handle simpler SVG's that don't have multiple path properties.</p>
+      <p>The CSS polygon property can only handle straight lines, so the more points used the smoother curves will be</p>
     </div>
 	</section>
 
@@ -24,9 +25,12 @@ eleventyNavigation:
     <div class="container">
       <form action="">
         <label for="numberOfPoints">Number of Points</label>
-        <input id="numberOfPoints" type="number" min="0" max="300">
+        <input id="numberOfPoints" type="number" min="0" max="300" value="60">
+        </br>
         <label for="svgFile">Upload SVG</label>
         <input id="svgFile" type="file" accept=".svg">
+        </br>
+        <button class="button button--primary submit" type="submit">Generate CSS</button>
       </form>
     </div>
 	</section>
@@ -35,6 +39,7 @@ eleventyNavigation:
     <div class="container">
       <h2>CSS Output</h2>
       <p class="code"></p>
+      <p class="aspect-ratio"></p>
       <img src="" alt="">
     </div>
   </section>

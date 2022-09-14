@@ -690,6 +690,14 @@ html {
   padding-bottom: 4rem;
 }
 
+pre {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+}
+
 /* Navigation Canvas
  * ----------------------------------------------- */
 .site > canvas {
@@ -805,6 +813,58 @@ html {
 
 section + .section--basic {
   margin-top: 6rem;
+}
+
+/* Buttons
+ * ----------------------------------------------- */
+.button {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  text-decoration: none;
+  background: none;
+  min-width: 15rem;
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  transition: 0.3s ease-out;
+}
+.button.button--primary {
+  background-color: #2b2b2b;
+  border: 1px solid #FFF;
+  color: #FFF;
+}
+.button.button--primary:hover, .button.button--primary:focus {
+  background-color: #FFF;
+  color: #212121;
+}
+
+/* CSS Clip Path
+ * ----------------------------------------------- */
+.project--clip-paths .output svg,
+.project--clip-paths .output img {
+  width: 100%;
+  max-width: 20rem;
+}
+.project--clip-paths .output img {
+  object-fit: cover;
+}
+.project--clip-paths .images {
+  padding: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 2.7rem;
+  background-color: #2b2b2b;
+}
+.project--clip-paths .images:empty {
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+  bottom: 0;
+  left: -20000px;
+  opacity: 0;
 }
 
 /* Site Logo
@@ -1335,6 +1395,32 @@ footer .attribution a {
 .generative-item a:hover h3,
 .generative-item a:focus h3 {
   padding-bottom: 1.8rem;
+}
+
+input:not([type=submit]),
+select {
+  padding: 0 0.9rem;
+  height: 5rem;
+  line-height: 5rem;
+  background-color: #2b2b2b;
+  border: 1px solid #FFF;
+  color: #FFF;
+}
+
+.form-item label {
+  display: block;
+}
+.form-item input, .form-item textarea, .form-item select {
+  display: block;
+}
+.form-item label + * {
+  margin-top: 0.45rem;
+}
+.form-item + button {
+  margin-top: 1.8rem;
+}
+.form-item + .form-item {
+  margin-top: 1.8rem;
 }
 
 /*# sourceMappingURL=style.css.map */

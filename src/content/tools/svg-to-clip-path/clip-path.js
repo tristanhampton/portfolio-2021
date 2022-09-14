@@ -1,41 +1,71 @@
-/**
- * This script isn't intended to be used in the site.
- * 
- * Add this file to scripts.js before use.
- * 
- * It can generate a css polygon property scaled from 0 to 100% by getting the polygon values here: https://path-to-points.netlify.app/
- * 
- * Simply replace the variable polygonString with the results from the previously mentioned site and check the console on the drupal site. 
- * Then copy and paste into CSS! 
- */
-
-
-
 let files = document.querySelector('#svgFile');
 let form = document.querySelector('form')
 
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
+
+  // clear images
+  document.querySelector('.output .images').innerHTML = '';
+
+  // get path elements
   const paths = await getSVGPaths(files.files);
+
+  // Get aspect ratio
+  const cssAspectRatio = await generateAspectRatio(files.files);
+
+  // Display uploaded svg as an image
+  generateImg(files.files, '.output .images');
+
+  // Get number of desired steps
   const steps = document.querySelector('#numberOfPoints').value ? document.querySelector('#numberOfPoints').value : 50
 
-  // current problem: convertSVGPathToPoints returns numbers in percentages.
+  // Convert path to array of points
   const points = convertSvgPathToPoints(paths, steps);
 
-  const cssPolygonValue = generateClipPath(points)
+  // Generate CSS code
+  const cssClipPath = generateClipPath(points)
 
-  // const aspectRatio = generateAspectRatio(points);
-
-  document.querySelector('.output .code').innerHTML = cssPolygonValue
-  // document.querySelector('.output .aspect-ratio').innerHTML = aspectRatio
+  
+  // Display and highlight CSS code
+  document.querySelector('.output .code').innerHTML = `img {\n ${cssClipPath}\n ${cssAspectRatio}\n}` ;
+  document.querySelector('.output .code').setAttribute('data-copy', cssClipPath + '\n' + cssAspectRatio);
+  hljs.highlightAll();
+  
+  // Generate clipped image
+  generateClippedImg(cssClipPath + cssAspectRatio, '.output .images')
 
   // TODO: Add uploaded element to display on DOM
   // TODO: Nicely output polygon code
   // TODO: Calculate aspect ratio to go with it
-  let img = document.querySelector('.output img');
-
-  img.src = files.files[0].name
 });
+
+// Copy css to clipboard
+document.querySelector('button.copy').addEventListener('click', copyToClipboard);
+
+function generateClippedImg(css, containerSelector) {
+  const imgContainer = document.querySelector(containerSelector);
+  const imgEl = document.createElement('img');
+  imgEl.src = 'https://picsum.photos/200/200'
+  imgEl.setAttribute('style', css);
+  
+  imgContainer.appendChild(imgEl);
+}
+
+function generateImg(files, containerSelector) {
+  const reader = new FileReader();
+
+  reader.onload = async function(e) {
+    const imgContainer = document.querySelector(containerSelector);
+    const svgData = e.target.result;
+    const imgEl = document.createElement('img');
+    
+    // imgContainer.innerHTML = '';
+    imgEl.src = svgData;
+    imgContainer.innerHTML += svgData;
+  }
+
+  reader.readAsText(files[0]);
+}
 
 
 function getSVGPaths(files) {
@@ -45,10 +75,10 @@ function getSVGPaths(files) {
     const reader = new FileReader();
   
     reader.onload = async function (e) {
-      var svgData = e.target.result;
-      var parser = new DOMParser();
-      var doc = parser.parseFromString(svgData, "image/svg+xml");
-      var pathTags = doc.getElementsByTagName("path");
+      const svgData = e.target.result;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgData, "image/svg+xml");
+      const pathTags = doc.getElementsByTagName("path");
   
       resolve(pathTags)
     }
@@ -114,23 +144,27 @@ function generateClipPath(coordinates) {
   return clipPath;
 }
 
-function generateAspectRatio(coordinates) {
-  const rawNumbersX = [], rawNumbersY = [];
-  let largestX, largestY;
+function generateAspectRatio(files) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
 
-  coordinates.forEach(array => {
-    let x = Number(array[0].replace('%', ''));
-    let y = Number(array[1].replace('%', ''));
+    reader.onload = async function (e) {
+      const svgData = e.target.result;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(svgData, "image/svg+xml");
+      const svg = doc.querySelector('svg');
+      let viewBox = svg.getAttribute('viewBox')
+      viewBox = viewBox.split(' ');
+      let aspectRatio = `aspect-ratio: ${viewBox[2]} / ${viewBox[3]};`;
 
-    
-    rawNumbersX.push(x);
-    rawNumbersY.push(y);
+      resolve(aspectRatio)
+    }
+
+    reader.readAsText(files[0]);
   });
-  
-  largestX = Math.max.apply(0, rawNumbersX);
-  largestY = Math.max.apply(0, rawNumbersY);
+}
 
-  let aspectRatio = `aspect-ratio: ${largestX} / ${largestY}`
-
-  return aspectRatio
+function copyToClipboard() {
+  const innerText = document.querySelector('.output .code').getAttribute('data-copy');
+  navigator.clipboard.writeText(innerText);
 }

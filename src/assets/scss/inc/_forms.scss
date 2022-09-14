@@ -1,0 +1,31 @@
+input:not([type='submit']),
+select {
+  padding: 0 $sp-1;
+  height: 5rem;
+  line-height: 5rem;
+  background-color: #2b2b2b;
+  border: 1px solid $white;
+  color: $white;
+}
+
+.form-item {
+  label {
+    display: block;
+  }
+
+  input, textarea, select {
+    display: block;
+  }
+
+  label + * {
+    margin-top: $sp-0;
+  }
+
+  +button {
+    margin-top: $sp-2;
+  }
+
+  +.form-item {
+    margin-top: $sp-2;
+  }
+}

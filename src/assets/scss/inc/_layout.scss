@@ -183,24 +183,48 @@ section {
 
 /* Buttons
  * ----------------------------------------------- */
-.button {
+@mixin button {
   @include reset-button;
   min-width: 15rem;
   height: 5rem;
   line-height: 5rem;
   text-align: center;
   transition: 0.3s ease-out;
+}
+
+@mixin button--primary {
+  background-color: $white;
+  border: 1px solid $white;
+  color: $black;
+
+  &:hover,
+  &:focus {
+    background-color: $black;
+    color: $white;
+  }
+}
+
+@mixin button--secondary {
+  background-color: $black;
+  border: 1px solid $white;
+  color: $white;
+
+  &:hover,
+  &:focus {
+    background-color: $white;
+    color: $black;
+  }
+}
+
+.button {
+  @include button;
 
   &.button--primary {
-    background-color: #2b2b2b;
-    border: 1px solid $white;
-    color: $white;
+    @include button--primary;
+  }
 
-    &:hover,
-    &:focus {
-      background-color: $white;
-      color: $black;
-    }
+  &.button--secondary {
+    @include button--secondary;
   }
 }
 

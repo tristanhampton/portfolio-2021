@@ -34,8 +34,6 @@ form.addEventListener('submit', async function(e) {
   // Generate clipped image
   generateClippedImg(cssClipPath + cssAspectRatio, '.output .images')
 
-  // TODO: Add uploaded element to display on DOM
-  // TODO: Nicely output polygon code
   // TODO: Calculate aspect ratio to go with it
 });
 

@@ -832,11 +832,20 @@ section + .section--basic {
   transition: 0.3s ease-out;
 }
 .button.button--primary {
-  background-color: #2b2b2b;
+  background-color: #FFF;
+  border: 1px solid #FFF;
+  color: #212121;
+}
+.button.button--primary:hover, .button.button--primary:focus {
+  background-color: #212121;
+  color: #FFF;
+}
+.button.button--secondary {
+  background-color: #212121;
   border: 1px solid #FFF;
   color: #FFF;
 }
-.button.button--primary:hover, .button.button--primary:focus {
+.button.button--secondary:hover, .button.button--secondary:focus {
   background-color: #FFF;
   color: #212121;
 }
@@ -1405,6 +1414,41 @@ select {
   background-color: #2b2b2b;
   border: 1px solid #FFF;
   color: #FFF;
+}
+
+.form-item.type--file label {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  border: none;
+  appearance: none;
+  text-decoration: none;
+  background: none;
+  min-width: 15rem;
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+  transition: 0.3s ease-out;
+  background-color: #212121;
+  border: 1px solid #FFF;
+  color: #FFF;
+}
+.form-item.type--file label:hover, .form-item.type--file label:focus {
+  background-color: #FFF;
+  color: #212121;
+}
+.form-item.type--file input[type=file] {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
 }
 
 .form-item label {

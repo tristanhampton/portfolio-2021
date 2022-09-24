@@ -94,7 +94,7 @@ function draw() {
 /* Other Functions
  * ----------------------------------------------- */
 function addListeners() {
-	document.querySelector('.container.type--canvas').addEventListener('mouseup', async function() {
+	document.querySelector('.container.type--canvas').addEventListener('click', async function() {
 		if (audio.paused) {
 			audio.play();
 			loop();

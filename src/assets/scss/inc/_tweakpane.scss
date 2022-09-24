@@ -1,0 +1,10 @@
+/* Fix form styles overriding Tweakpane
+ * ----------------------------------------------- */
+.tp-rotv {
+  input:not([type=submit]) {
+    padding: 0 4px;
+    background-color: var(--in-bg);
+    height: var(--bld-us);
+    line-height: var(--bld-us);
+  }
+}

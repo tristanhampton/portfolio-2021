@@ -3,6 +3,7 @@
    License: none (public domain)
 */
 @import url("https://fonts.googleapis.com/css2?family=Lato&family=Noto+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nabla&display=swap");
 html,
 body,
 div,
@@ -521,6 +522,10 @@ body {
     transform: rotate(360deg);
   }
 }
+.test-h1 {
+  font-family: "Nabla", cursive;
+}
+
 /* Font Sizes
  *----------------------------------*/
 p {
@@ -675,7 +680,7 @@ html {
  *----------------------------------*/
 * + p,
 * + li {
-  margin-top: 1.8rem;
+  margin-top: 0.45rem;
 }
 * + h1,
 * + h2,
@@ -684,6 +689,14 @@ html {
 }
 * + section {
   margin-top: 7.2rem;
+}
+
+p {
+  max-width: 70ch;
+}
+
+i {
+  font-style: italic;
 }
 
 .projects__list {
@@ -698,40 +711,6 @@ pre {
   width: 100%;
 }
 
-/* Navigation Canvas
- * ----------------------------------------------- */
-.site > canvas {
-  transition: opacity 0.3s ease-out;
-  transition-delay: 0.3s;
-  width: 300px !important;
-  height: 300px !important;
-}
-@media (min-width: 781px) {
-  .site > canvas {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-  }
-}
-@media (max-width: 781px) {
-  .site > canvas {
-    visibility: hidden;
-    opacity: 0;
-  }
-  .site.lock > canvas {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 15;
-    visibility: visible;
-    opacity: 1;
-  }
-  .site.lock .site__nav {
-    padding-bottom: 30rem;
-  }
-}
-
 /* Page Layout
  *----------------------------------*/
 .site {
@@ -741,6 +720,7 @@ pre {
   background-color: #212121;
   color: #f9f9f9;
   font-size: 1.6rem;
+  line-height: 1.4;
 }
 .site.lock {
   overflow: hidden;
@@ -1465,6 +1445,15 @@ select {
 }
 .form-item + .form-item {
   margin-top: 1.8rem;
+}
+
+/* Fix form styles overriding Tweakpane
+ * ----------------------------------------------- */
+.tp-rotv input:not([type=submit]) {
+  padding: 0 4px;
+  background-color: var(--in-bg);
+  height: var(--bld-us);
+  line-height: var(--bld-us);
 }
 
 /*# sourceMappingURL=style.css.map */

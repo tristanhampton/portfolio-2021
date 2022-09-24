@@ -1,0 +1,41 @@
+---
+tags:
+- generative 
+date: 2022-08-26
+layout: canvas
+title: Album Animation
+permalink: "generative/supernormal/"
+published: true
+thumbnail: "audio-supernormal.png"
+eleventyNavigation:
+  key: supernormal
+  parent: 'generative'
+  order: 1
+---
+<main class="site__main main--projects">
+
+	<section class="intro">
+		<div class="container">
+			<h1>{{ title }}</h1>
+			<p>This simple animation was inspired by the album <a href="https://open.spotify.com/album/2bqWW4DxQFU03USx788o9d"><i>Supernormal..and..Pilot</i></a> by <a href="https://modernchemistry.bandcamp.com/">Modern Chemistry</a>. Click the canvas to start playing the audio visualizer.</p>
+    </div>
+	</section>
+
+	<section class="project__canvas section--basic">
+		<h2 class="sr-only">Project Canvas</h2>
+		<div class="container type--canvas" id="canvasContainer">
+		</div>
+	</section>
+
+	<section class="project__tweak-settings section--basic">
+		<h2 class="sr-only">Project Settings</h2>
+		<div class="container">
+		</div>
+	</section>
+
+</main>
+
+<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
+<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
+<script src="/js/generative/p5-custom-library.js"></script>
+<script src="../js/audio-supernormal.js"></script>

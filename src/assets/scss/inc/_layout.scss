@@ -16,7 +16,7 @@ html {
 * {
   + p,
   + li {
-   margin-top: $sp-2;
+   margin-top: $sp-0;
   }
 
   + h1,
@@ -28,6 +28,14 @@ html {
   + section {
     margin-top: $sp-8;
   }
+}
+
+p {
+  max-width: 70ch;
+}
+
+i {
+  font-style: italic;
 }
 
 .projects__list {
@@ -42,48 +50,6 @@ pre {
   width: 100%;
 }
 
-/* Navigation Canvas
- * ----------------------------------------------- */
-.site {
-  > canvas {
-    transition: opacity 0.3s ease-out;
-    transition-delay: 0.3s;
-    width: 300px !important;
-    height: 300px !important;
-  }
-
-  @include min-bp(layout-break) {
-    > canvas {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-    }
-  }
-
-  @include bp(layout-break) {
-    > canvas {
-      visibility: hidden;
-      opacity: 0;
-    }
-
-    &.lock {
-      > canvas {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        z-index: 15;
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .site__nav {
-        padding-bottom: 30rem;
-      }
-    }
-  }
-}
-
 /* Page Layout
  *----------------------------------*/
 .site {
@@ -92,6 +58,7 @@ pre {
   background-color: #212121;
   color: #f9f9f9;
   font-size: $text-small;
+  line-height: 1.4;
 
   &.lock {
     overflow: hidden;

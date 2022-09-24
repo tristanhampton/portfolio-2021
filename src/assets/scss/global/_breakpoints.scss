@@ -1,12 +1,11 @@
-$breakpoints: ('desktop' : 1020px,
-'tablet' : 800px,
-'tablet-switch' : 750px,
-'mid-tablet' : 600px,
-'mobile-switch' : 450px,
-'mobile-small' : 375px,
+$breakpoints: (
+    'desktop' : 1020px,
+    'tablet' : 800px,
+    'mid-tablet' : 600px,
+    'mobile' : 450px,
 
-'layout-break' : 781px,
-'menu-break' : 1020px,
+    'layout-break' : 781px,
+    'menu-break' : 1020px,
 );
 
 @mixin bp($max-width) {

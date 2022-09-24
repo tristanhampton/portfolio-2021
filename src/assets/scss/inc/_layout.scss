@@ -50,6 +50,12 @@ pre {
   width: 100%;
 }
 
+.mobile-only {
+  @include min-bp(mobile) {
+    display: none;
+  }
+}
+
 /* Page Layout
  *----------------------------------*/
 .site {
@@ -129,7 +135,7 @@ pre {
     }
   }
 
-  @include min-bp(mobile-switch) {
+  @include min-bp(mobile) {
     padding: 0 $padding-tablet;
   }
 

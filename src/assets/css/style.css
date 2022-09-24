@@ -711,6 +711,12 @@ pre {
   width: 100%;
 }
 
+@media (min-width: 450px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
 /* Page Layout
  *----------------------------------*/
 .site {

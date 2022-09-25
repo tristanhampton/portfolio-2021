@@ -1,18 +1,17 @@
 const settings = {
 	width: null,
 	height: null,
-	radius: 1, // default 1.2
+	radius: 1.2, // percent
 	backgroundColor: '#5a2e01',
 	circleColor: '#c6a333',
 	audioChannel: 6,
 	playing: false,
 	scaleMin: 0.3,
 	scaleMax: 1.9,
-	steps: 60,
 };
 
 let audio, audioContext, audioData, sourceNode, analyserNode
-let minDb, maxDb, channels=[];
+let minDb, maxDb;
 createAudio();
 addListeners();
 
@@ -23,10 +22,6 @@ function setup() {
 	// Create and place the canvas
 	const canvas = createCanvas(settings.width, settings.height);
 	canvas.parent('canvasContainer');
-
-	for(let i=0; i < settings.steps; i++) {
-		channels.push(getRandomInt(4,64));
-	}
 }
 
 function draw() {
@@ -52,24 +47,10 @@ function draw() {
 	fill(settings.circleColor);
 	translate(settings.width*0.88, settings.height*0.3);
 
-	let bins=[];
-	for(let i =0; i<settings.steps; i++) {
-		let channel = mapRange(audioData[channels[i]], minDb, maxDb, settings.scaleMin, settings.scaleMax, true);
-		bins.push(channel);
-	}
-
-	beginShape();
-	let angle = 0;
-	let step = TWO_PI/settings.steps+1;
-	let r = settings.width / 2 * settings.radius;
-	for (let i = 0; i <= settings.steps; i++) {
-		x = r * sin(angle) * bins[i];
-		y = r * cos(angle) * bins[i];
-		curveVertex(x, y);
-
-		angle += step;
-	}
-	endShape();
+	// Get a mapped number from audio data to apply to circle
+	let mapped = mapRange(audioData[settings.audioChannel], minDb, maxDb, settings.scaleMin, settings.scaleMax, true);
+	let circleRadius = settings.width * settings.radius * mapped;
+	circle(0, 0, circleRadius);
 	pop();
 
 	// Text always last so it's on top
@@ -166,6 +147,7 @@ function createAudio() {
 * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
 const folder = pane.addFolder({ title: 'Settings' });
+folder.addInput(settings, 'audioChannel', { min: 1, max: 5555, step: 1, label: 'Audio Channel' });
 folder.addInput(settings, 'scaleMin', { min: 0.1, max: 0.8, step: 0.1, label: 'Scale Minimum' });
 folder.addInput(settings, 'scaleMax', { min: 1.2, max: 4, step: 0.1, label: 'Scale Maximum' });
 

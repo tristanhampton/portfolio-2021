@@ -72,22 +72,6 @@ function draw() {
 	endShape();
 	pop();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	// Text always last so it's on top
 	//--- Modern Chemistry
 	push();

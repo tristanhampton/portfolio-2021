@@ -11,7 +11,7 @@ const settings = {
 };
 
 let audio, audioContext, audioData, sourceNode, analyserNode
-let minDb, maxDb;
+let minDb, maxDb, bins = [];
 createAudio();
 addListeners();
 
@@ -49,9 +49,38 @@ function draw() {
 
 	// Get a mapped number from audio data to apply to circle
 	let mapped = mapRange(audioData[settings.audioChannel], minDb, maxDb, settings.scaleMin, settings.scaleMax, true);
-	let circleRadius = settings.width * settings.radius * mapped;
-	circle(0, 0, circleRadius);
+
+	for(let i =0; i<12; i++) {
+		let channel = mapRange(audioData[getRandomInt(4,64)], minDb, maxDb, settings.scaleMin, settings.scaleMax, true);
+		bins.push(channel);
+	}
+
+	beginShape();
+	for(let i =0; i < 360/30; i++) {
+		let r = settings.width * settings.radius;
+		let x = r * sin(i);
+		let y = r * cos(i);
+		vertex(x,y);
+		console.log(r, x,y)
+	}
+	endShape();
 	pop();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	// Text always last so it's on top
 	//--- Modern Chemistry

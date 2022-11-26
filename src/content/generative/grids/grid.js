@@ -47,8 +47,6 @@ function setup() {
 
 		points.push(new Point({ x, y }));
 	}
-
-	console.log(points)
 }
 
 function draw() {
@@ -109,7 +107,6 @@ class Point {
 		circle(0, 0, 10);
 		endShape();
 		pop();
-		console.log('draw: ', this.x, this.y)
 	}
 }
 

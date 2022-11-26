@@ -697,7 +697,7 @@ p5.prototype.risoColors = function(numColors) {
 
   if (numColors == 'random') {
     let index = Math.floor(Math.random() * allColors.length);
-    console.log(allColors[index].hex)
+
     return allColors[index].hex;
   } else if (numColors) {
     for(i=0; i<numColors; i++) {

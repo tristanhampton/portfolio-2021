@@ -133,7 +133,7 @@ function createAudio() {
 
 	// Create Source Node from adding audio element to Audio Context
 	sourceNode = audioContext.createMediaElementSource(audio);
-	console.log(sourceNode)
+
 	sourceNode.connect(audioContext.destination);
 
 	// Create Analyser Node to read data from audio and work with it

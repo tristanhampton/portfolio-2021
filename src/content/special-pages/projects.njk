@@ -13,7 +13,7 @@ permalink: "/projects/"
 	<section class="intro">
 		<div class="container">
 			<h1>Web Projects</h1>
-			
+		</div>
 	</section>
 
 	<section class="projects__list">
@@ -30,19 +30,19 @@ permalink: "/projects/"
 		</div>
 	</section>
 
-	{# <section class="projects__list">
+	<section class="projects__list">
 		<div class="container">
 			<h2>Projects with Yellow Pencil</h2>
 
 			{% for project in collections.yellowpencil %}
-				<article class="project-item" style="background-image: url(../{{ project.data.img_small }})">
+				<article class="project-item" style="background-image: url(img/{{ project.data.img_small }})">
 					<a href="{{ project.data.website_url if project.data.redirect else project.url }}" target="{{ '_blank' if project.data.redirect else '' }}" title="{{ project.data.title }}">
 						<h3>{{ project.data.short }}</h3>
 					</a>
 				</article>
 			{% endfor %}
 		</div>
-	</section> #}
+	</section>
 
 	<section class="projects__list">
 		<div class="container">

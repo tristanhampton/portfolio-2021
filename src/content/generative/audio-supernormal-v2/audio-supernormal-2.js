@@ -12,7 +12,7 @@ const settings = {
 };
 
 let audio, audioContext, audioData, sourceNode, analyserNode
-let minDb, maxDb, channels=[];
+let minDb, maxDb, channels = [];
 createAudio();
 addListeners();
 
@@ -24,8 +24,8 @@ function setup() {
 	const canvas = createCanvas(settings.width, settings.height);
 	canvas.parent('canvasContainer');
 
-	for(let i=0; i < settings.steps; i++) {
-		channels.push(getRandomInt(4,64));
+	for (let i = 0; i < settings.steps; i++) {
+		channels.push(getRandomInt(4, 64));
 	}
 }
 
@@ -37,7 +37,7 @@ function draw() {
 	analyserNode.getFloatFrequencyData(audioData);
 
 	// If not playing, draw to look like album artwork
-	if(!settings.playing) {
+	if (!settings.playing) {
 		push();
 		noStroke();
 		fill(settings.circleColor);
@@ -50,17 +50,17 @@ function draw() {
 	push();
 	noStroke();
 	fill(settings.circleColor);
-	translate(settings.width*0.88, settings.height*0.3);
+	translate(settings.width * 0.88, settings.height * 0.3);
 
-	let bins=[];
-	for(let i =0; i<settings.steps; i++) {
+	let bins = [];
+	for (let i = 0; i < settings.steps; i++) {
 		let channel = mapRange(audioData[channels[i]], minDb, maxDb, settings.scaleMin, settings.scaleMax, true);
 		bins.push(channel);
 	}
 
 	beginShape();
 	let angle = 0;
-	let step = TWO_PI/settings.steps+1;
+	let step = TWO_PI / settings.steps + 1;
 	let r = settings.width / 2 * settings.radius;
 	for (let i = 0; i <= settings.steps; i++) {
 		x = r * sin(angle) * bins[i];
@@ -113,30 +113,27 @@ function draw() {
 /* Other Functions
  * ----------------------------------------------- */
 function addListeners() {
-	document.querySelector('.container.type--canvas').addEventListener('click', async function() {
-		if (audio.paused) {
-			audio.play();
-			loop();
-			settings.playing = true;
-		} else {
-			audio.pause();
-			noLoop();
-			settings.playing = false;
-		}
+
+	document.querySelector('audio').addEventListener('play', async function () {
+		loop();
+		settings.playing = true;
+	});
+
+	document.querySelector('audio').addEventListener('pause', async function () {
+		noLoop();
+		settings.playing = false;
 	});
 }
 
 function createAudio() {
-	audio = document.createElement('audio');
-
-	// source file is in generative/audio
-	audio.src = '../mp3/supernormal.mp3';
+	audio = document.querySelector('audio');
 
 	// Create Audio Context
 	audioContext = new AudioContext();
-	
+
 	// Create Source Node from adding audio element to Audio Context
 	sourceNode = audioContext.createMediaElementSource(audio);
+	console.log(sourceNode)
 	sourceNode.connect(audioContext.destination);
 
 	// Create Analyser Node to read data from audio and work with it

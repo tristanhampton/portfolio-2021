@@ -84,22 +84,19 @@ function draw() {
 /* Other Functions
  * ----------------------------------------------- */
 function addListeners() {
-	document.querySelector('.container.type--canvas').addEventListener('mouseup', async function() {
-		if (audio.paused) {
-			audio.play();
-			loop();
-		} else {
-			audio.pause();
-			noLoop();
-		}
+	document.querySelector('audio').addEventListener('play', async function () {
+		loop();
+		settings.playing = true;
+	});
+
+	document.querySelector('audio').addEventListener('pause', async function () {
+		noLoop();
+		settings.playing = false;
 	});
 }
 
 function createAudio() {
-	audio = document.createElement('audio');
-
-	// source file is in generative/audio
-	audio.src = '../mp3/Apta - Elements 1 - 07 Breath.mp3';
+	audio = document.querySelector('audio');
 
 	// Create Audio Context
 	audioContext = new AudioContext();

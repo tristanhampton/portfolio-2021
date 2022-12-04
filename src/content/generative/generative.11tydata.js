@@ -19,7 +19,7 @@ module.exports = {
     },
     eleventyNavigation: {
       key: data => data.title,
-      parent: data => 'generative',
+      parent: 'generative',
     }
   }
 }

@@ -1,16 +1,13 @@
 ---
+title: Pencil Crayon Walkers
+date: 2022-04-15
 tags:
 - generative 
-date: 2022-04-15
-layout: canvas
-title: Pencil Crayon Walkers
-permalink: "generative/pencil-walkers/"
+libraries:
+- p5.min.js
+- tweakpane.min.js
+- p5-custom-library.js
 published: true
-thumbnail: "pencil-crayon-walkers.png"
-eleventyNavigation:
-  key: Pencil Walkers
-  parent: 'generative'
-  order: 1
 ---
 <main class="site__main">
 
@@ -28,13 +25,11 @@ eleventyNavigation:
 
 	<section class="project__tweak-settings section--basic">
 		<h2 class="sr-only">Project Settings</h2>
-		<div class="container">
-		</div>
+		<div class="container"></div>
 	</section>
-
 </main>
 
-<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
-<script src="/js/generative/p5-custom-library.js"></script>
-<script src="../js/pencil-crayons.js"></script>
+{% for library in libraries %}
+	<script type="text/javascript" src="/js/plugins/{{ library }}"></script>
+{% endfor %}
+<script src="../js/{{ js_file }}.js"></script>

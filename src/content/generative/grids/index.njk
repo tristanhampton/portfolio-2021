@@ -1,17 +1,13 @@
 ---
+title: Grids
+date: 2022-12-31
 tags:
 - generative 
 - study
-date: 2022-12-31
-layout: canvas
-title: Grids
-permalink: "generative/grid/"
-published: false
-thumbnail: "grid.png"
-eleventyNavigation:
-  key: Grid
-  parent: 'generative'
-  order: 1
+libraries:
+- p5.min.js
+- tweakpane.min.js
+- p5-custom-library.js
 ---
 <main class="site__main main--projects">
 
@@ -24,19 +20,17 @@ eleventyNavigation:
 
 	<section class="project__canvas section--basic">
 		<h2 class="sr-only">Project Canvas</h2>
-		<div class="container type--canvas" id="canvasContainer">
-		</div>
+		<div class="container type--canvas" id="canvasContainer"></div>
 	</section>
 
 	<section class="project__tweak-settings section--basic">
 		<h2 class="sr-only">Project Settings</h2>
-		<div class="container">
-		</div>
+		<div class="container"></div>
 	</section>
 
 </main>
 
-<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
-<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script src="/js/generative/p5-custom-library.js"></script>
-<script src="../js/grid.js"></script>
+{% for library in libraries %}
+	<script type="text/javascript" src="/js/plugins/{{ library }}"></script>
+{% endfor %}
+<script src="../js/{{ js_file }}.js"></script>

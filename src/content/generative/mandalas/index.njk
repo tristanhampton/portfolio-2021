@@ -1,16 +1,13 @@
 ---
+title: Mandalas
+date: 2022-06-15
 tags:
 - generative 
-date: 2022-06-15
-layout: canvas
-title: Mandalas
-permalink: "generative/mandalas/"
+libraries:
+- p5.min.js
+- tweakpane.min.js
+- p5-custom-library.js
 published: true
-thumbnail: "mandalas.png"
-eleventyNavigation:
-  key: Noisy Lines
-  parent: 'generative'
-  order: 1
 ---
 <main class="site__main main--projects">
 
@@ -32,7 +29,7 @@ eleventyNavigation:
 
 </main>
 
-<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
-<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script src="/js/generative/p5-custom-library.js"></script>
-<script src="../js/mandalas.js"></script>
+{% for library in libraries %}
+	<script type="text/javascript" src="/js/plugins/{{ library }}"></script>
+{% endfor %}
+<script src="../js/{{ js_file }}.js"></script>

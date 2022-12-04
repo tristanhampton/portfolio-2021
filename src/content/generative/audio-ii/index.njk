@@ -1,17 +1,13 @@
 ---
+title: Audio II
+date: 2022-08-26
 tags:
 - generative 
-- study
-date: 2022-08-26
-layout: canvas
-title: Audio II
-permalink: "generative/audio-ii/"
+libraries:
+- p5.min.js
+- tweakpane.min.js
+- p5-custom-library.js
 published: true
-thumbnail: "audio-ii.png"
-eleventyNavigation:
-  key: Title
-  parent: 'audio-ii'
-  order: 1
 ---
 <main class="site__main main--projects">
 
@@ -34,13 +30,11 @@ eleventyNavigation:
 
 	<section class="project__tweak-settings section--basic">
 		<h2 class="sr-only">Project Settings</h2>
-		<div class="container">
-		</div>
+		<div class="container"></div>
 	</section>
-
 </main>
 
-<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
-<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script src="/js/generative/p5-custom-library.js"></script>
-<script src="../js/audio-ii.js"></script>
+{% for library in libraries %}
+	<script type="text/javascript" src="/js/plugins/{{ library }}"></script>
+{% endfor %}
+<script src="../js/{{ js_file }}.js"></script>

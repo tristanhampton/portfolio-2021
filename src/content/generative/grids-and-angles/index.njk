@@ -1,16 +1,13 @@
 ---
+title: Grids and Angles
+date: 2022-05-10
 tags:
 - generative 
-date: 2022-05-10
-layout: canvas
-title: Grids and Angles
-permalink: "generative/grids-and-angles/"
+libraries:
+- p5.min.js
+- tweakpane.min.js
+- p5-custom-library.js
 published: true
-thumbnail: "grids-and-angles.png"
-eleventyNavigation:
-  key: Grids and Angles
-  parent: 'generative'
-  order: 1
 ---
 <main class="site__main main--projects">
 
@@ -24,19 +21,17 @@ eleventyNavigation:
 
 	<section class="project__canvas section--basic">
 		<h2 class="sr-only">Project Canvas</h2>
-		<div class="container type--canvas" id="canvasContainer">
-		</div>
+		<div class="container type--canvas" id="canvasContainer"></div>
 	</section>
 
 	<section class="project__tweak-settings section--basic">
 		<h2 class="sr-only">Project Settings</h2>
-		<div class="container">
-		</div>
+		<div class="container"></div>
 	</section>
 
 </main>
 
-<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
-<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script src="/js/generative/p5-custom-library.js"></script>
-<script src="../js/grids-and-angles.js"></script>
+{% for library in libraries %}
+	<script type="text/javascript" src="/js/plugins/{{ library }}"></script>
+{% endfor %}
+<script src="../js/{{ js_file }}.js"></script>

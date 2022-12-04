@@ -1,16 +1,12 @@
 ---
+title: Noisy Lines
+date: 2022-05-28
 tags:
 - generative 
-date: 2022-05-28
-layout: canvas
-title: Noisy Lines
-permalink: "generative/noisy-lines/"
-published: false
-thumbnail: "noisy-lines.png"
-eleventyNavigation:
-  key: Noisy Lines
-  parent: 'generative'
-  order: 1
+libraries:
+- p5.min.js
+- tweakpane.min.js
+- p5-custom-library.js
 ---
 <main class="site__main main--projects">
 
@@ -30,10 +26,9 @@ eleventyNavigation:
 		<h2 class="sr-only">Project Settings</h2>
 		<div class="container"></div>
 	</section>
-
 </main>
 
-<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
-<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script src="/js/generative/noisy-lines.js"></script>
-<script src="../js/noise-lines.js"></script>
+{% for library in libraries %}
+	<script type="text/javascript" src="/js/plugins/{{ library }}"></script>
+{% endfor %}
+<script src="../js/{{ js_file }}.js"></script>

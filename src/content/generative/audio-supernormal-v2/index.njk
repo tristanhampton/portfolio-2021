@@ -1,16 +1,13 @@
 ---
+title: Album Animation II
+date: 2022-08-26
 tags:
 - generative 
-date: 2022-08-26
-layout: canvas
-title: Album Animation II
-permalink: "generative/supernormal-ii/"
+libraries:
+- p5.min.js
+- tweakpane.min.js
+- p5-custom-library.js
 published: true
-thumbnail: "audio-supernormal-2.png"
-eleventyNavigation:
-  key: supernormal
-  parent: 'generative'
-  order: 1
 ---
 <main class="site__main main--projects">
 
@@ -38,7 +35,7 @@ eleventyNavigation:
 
 </main>
 
-<script type="text/javascript" src="/js/plugins/p5.min.js"></script>
-<script type="text/javascript" src="/js/plugins/tweakpane.min.js"></script>
-<script src="/js/generative/p5-custom-library.js"></script>
-<script src="../js/audio-supernormal-2.js"></script>
+{% for library in libraries %}
+	<script type="text/javascript" src="/js/plugins/{{ library }}"></script>
+{% endfor %}
+<script src="../js/{{ js_file }}.js"></script>

@@ -14,9 +14,6 @@ p5.prototype.getCanvasWidth = function () {
   return width - padding - padding;
 }
 
-
-
-
 /* Lines
  * ----------------------------------------------- */
 
@@ -744,3 +741,28 @@ p5.prototype.quadInOut = function (t) {
   t--
   return -0.5 * (t * (t - 2) - 1)
 }
+
+
+/**
+ * Point Inside Polygon
+ * 
+ * point is array [x,y]
+ * vs is array of coordinates [[x,y], [x,y]]
+ */
+p5.prototype.inside = function(point, vs) {
+  // https://stackoverflow.com/questions/22521982/check-if-point-is-inside-a-polygon
+
+  var x = point[0], y = point[1];
+
+  var inside = false;
+  for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
+    var xi = vs[i][0], yi = vs[i][1];
+    var xj = vs[j][0], yj = vs[j][1];
+
+    var intersect = ((yi > y) != (yj > y))
+      && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
+  }
+
+  return inside;
+};

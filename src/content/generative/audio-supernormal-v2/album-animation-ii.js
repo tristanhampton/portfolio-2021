@@ -117,13 +117,7 @@ function draw() {
 /* Tweakpane Things
 * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
-
 const playPauseButton = pane.addButton({ title: 'Play/Pause'});
-// const saveButton = pane.addButton({ title: 'Save Image' });
-
-// saveButton.on('click', function () {
-// 	saveCanvas('generated-image', 'png');
-// });
 
 playPauseButton.on('click', function() {
 	if(audio.isPlaying()) {
@@ -133,9 +127,4 @@ playPauseButton.on('click', function() {
 		audio.play();
 		settings.playing = true;
 	}
-});
-
-
-pane.on('change', function () {
-	redraw();
 });

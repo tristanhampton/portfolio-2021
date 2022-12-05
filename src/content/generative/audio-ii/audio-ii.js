@@ -10,8 +10,12 @@ settings.slice = Math.PI * 2 / settings.numSlices;
 
 let audio, audioContext, audioData, sourceNode, analyserNode
 let bin, bins = [], lineWidth, mapped, minDb, maxDb, lineWidths = [];
-createAudio();
-addListeners();
+
+function preload() {
+	audio = loadSound('../mp3/Apta - Elements 1 - 07 Breath.mp3');
+	audioContext = getAudioContext();
+	analyserNode = new p5.FFT(0.9);
+}
 
 function setup() {
 	settings.width = getCanvasWidth();
@@ -27,7 +31,7 @@ function draw() {
 	background('#f5f1e6');
 	strokeWeight(1);
 
-	analyserNode.getFloatFrequencyData(audioData);
+	audioData = analyserNode.analyze();
 
 	// Create array of random numbers to pull from audioData
 	for(i=0; i < settings.numCircles * settings.numSlices; i++) {
@@ -63,7 +67,7 @@ function draw() {
 			if(!bin) continue;
 
 			// map the audio data to be between 0 and 1
-			mapped = mapRange(audioData[bin], minDb, maxDb, 0, 1, true);
+			mapped = mapRange(audioData[bin], 0, 255, 0, 1, true);
 			lineWidth = lineWidths[i] * mapped;
 			if (lineWidth < 1) continue;
 
@@ -131,12 +135,19 @@ function createAudio() {
 /* Tweakpane Things
 * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
+const playPauseButton = pane.addButton({ title: 'Play/Pause' });
 const saveButton = pane.addButton({ title: 'Save Image' });
 
 saveButton.on('click', function () {
 	saveCanvas('generated-image', 'png');
 });
 
-pane.on('change', function () {
-	redraw();
+playPauseButton.on('click', function () {
+	if (audio.isPlaying()) {
+		audio.pause();
+		settings.playing = false;
+	} else {
+		audio.play();
+		settings.playing = true;
+	}
 });

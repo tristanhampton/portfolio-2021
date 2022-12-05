@@ -11,31 +11,35 @@ const settings = {
 	steps: 60,
 };
 
-let audio, audioContext, audioData, sourceNode, analyserNode
+let audio, audioContext, audioData, sourceNode, analyserNode, fft;
 let minDb, maxDb, channels = [];
-createAudio();
-addListeners();
+
+function preload() {
+	audio = loadSound('../mp3/supernormal.mp3');
+	audioContext = getAudioContext();
+	analyserNode = new p5.FFT(0.9);
+}
 
 function setup() {
 	settings.width = getCanvasWidth();
 	settings.height = getCanvasWidth();
-
+	
 	// Create and place the canvas
 	const canvas = createCanvas(settings.width, settings.height);
 	canvas.parent('canvasContainer');
-
+	
 	for (let i = 0; i < settings.steps; i++) {
 		channels.push(getRandomInt(4, 64));
 	}
+	
 }
 
 function draw() {
 	noStroke();
 	background(settings.backgroundColor);
 	strokeWeight(1);
-
-	analyserNode.getFloatFrequencyData(audioData);
-
+	audioData = analyserNode.analyze();
+	
 	// If not playing, draw to look like album artwork
 	if (!settings.playing) {
 		push();
@@ -54,7 +58,7 @@ function draw() {
 
 	let bins = [];
 	for (let i = 0; i < settings.steps; i++) {
-		let channel = mapRange(audioData[channels[i]], minDb, maxDb, settings.scaleMin, settings.scaleMax, true);
+		let channel = mapRange(audioData[channels[i]], 30, 255, settings.scaleMin, settings.scaleMax, true);
 		bins.push(channel);
 	}
 
@@ -110,64 +114,26 @@ function draw() {
 	pop();
 }
 
-/* Other Functions
- * ----------------------------------------------- */
-function addListeners() {
-
-	document.querySelector('audio').addEventListener('play', async function () {
-		loop();
-		settings.playing = true;
-	});
-
-	document.querySelector('audio').addEventListener('pause', async function () {
-		noLoop();
-		settings.playing = false;
-	});
-}
-
-function createAudio() {
-	audio = document.querySelector('audio');
-
-	// Create Audio Context
-	audioContext = new AudioContext();
-
-	// Create Source Node from adding audio element to Audio Context
-	sourceNode = audioContext.createMediaElementSource(audio);
-
-	sourceNode.connect(audioContext.destination);
-
-	// Create Analyser Node to read data from audio and work with it
-	analyserNode = audioContext.createAnalyser();
-
-	// Change fft (Fast Fourier Transform) from default. Should be a power of 2 from 0 to 32768.
-	analyserNode.fftSize = 32768;
-
-	// Change smoothing constant for smoother effects (default is 0.8)
-	analyserNode.smoothingTimeConstant = 0.8;
-
-	// Change min/max defaults for decibels (defaults are -100 and -30 respectively)
-	analyserNode.minDecibels = -120;
-	analyserNode.maxDecibels = -20;
-
-	minDb = analyserNode.minDecibels;
-	maxDb = analyserNode.maxDecibels;
-
-	// Connect the analyser node
-	sourceNode.connect(analyserNode);
-
-	// has to be a float array because we're using analyserNode.getFloatFrequencyData in the draw function
-	audioData = new Float32Array(analyserNode.frequencyBinCount);
-}
-
 /* Tweakpane Things
 * ----------------------------------------------- */
 const pane = new Tweakpane.Pane({ title: 'Controls', container: document.querySelector('.project__tweak-settings .container') })
 const folder = pane.addFolder({ title: 'Settings' });
 
+const playPauseButton = pane.addButton({ title: 'Play/Pause'});
 const saveButton = pane.addButton({ title: 'Save Image' });
 
 saveButton.on('click', function () {
 	saveCanvas('generated-image', 'png');
+});
+
+playPauseButton.on('click', function() {
+	if(audio.isPlaying()) {
+		audio.pause();
+		settings.playing = false;
+	} else {
+		audio.play();
+		settings.playing = true;
+	}
 });
 
 

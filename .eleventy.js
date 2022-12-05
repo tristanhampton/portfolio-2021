@@ -21,6 +21,9 @@ module.exports = function (config) {
     //--- Adds JS to _site
     config.addPassthroughCopy({ "src/assets/js": "js" });
 
+    //--- Adds Piano Notes to _site
+    config.addPassthroughCopy({ "src/assets/piano-notes": "piano-notes" });
+
     //--- Add Generative JS, IMG, JSON, and MP3 files
     config.addPassthroughCopy({ "src/content/generative/*/*.js": 'generative/js' });
     config.addPassthroughCopy({ "src/content/generative/*/*.png": 'generative/img' });

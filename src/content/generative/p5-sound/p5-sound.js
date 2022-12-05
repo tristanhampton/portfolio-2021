@@ -3,14 +3,13 @@ const settings = {
 	height: null,
 };
 
-let song;
+let song, slider, audioContext;
 
 function preload() {
 	song = loadSound('../mp3/just-like-a-rainbow.mp3');
 }
 
 function setup() {
-	noLoop();
 	settings.width = getCanvasWidth();
 	settings.height = getCanvasWidth();
 
@@ -18,12 +17,16 @@ function setup() {
 	const canvas = createCanvas(settings.width, settings.height);
 	canvas.parent('canvasContainer');
 	canvas.mouseClicked(redraw);
+
+	slider = createSlider(0,1, 0.5, 0.01);
 }
 
 function draw() {
 	noStroke();
 	background('#f5f1e6');
 	strokeWeight(1);
+
+	song.setVolume(slider.value());
 }
 
 
